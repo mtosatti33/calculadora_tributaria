@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<CONFIG>
-  <Compiler Value="/usr/bin/fpc" Date="1574718682"/>
-  <Params Value=" -MObjFPC -Scghi -CX -Cg -O3 -XX -l -vewnhibq &quot;-Fi/home/marcelo/bin/Calculadora Tibutária/lib/x86_64-linux&quot; -Fu/usr/lib/lazarus/2.0.6/lcl/units/x86_64-linux/gtk2 -Fu/usr/lib/lazarus/2.0.6/lcl/units/x86_64-linux -Fu/usr/lib/lazarus/2.0.6/components/lazutils/lib/x86_64-linux -Fu/usr/lib/lazarus/2.0.6/packager/units/x86_64-linux &quot;-Fu/home/marcelo/bin/Calculadora Tibutária/&quot; &quot;-FU/home/marcelo/bin/Calculadora Tibutária/lib/x86_64-linux/&quot; &quot;-FE/home/marcelo/bin/Calculadora Tibutária/&quot; &quot;-o/home/marcelo/bin/Calculadora Tibutária/calc_tributaria&quot; -dLCL -dLCLgtk2 calc_tributaria.lpr"/>
-</CONFIG>
