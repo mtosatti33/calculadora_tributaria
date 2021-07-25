@@ -91,6 +91,7 @@ type
     procedure edtQtdeClick(Sender: TObject);
     procedure edtQtdeKeyDown(Sender: TObject; var Key: word; Shift: TShiftState);
     procedure edtQtdeKeyPress(Sender: TObject; var Key: char);
+    procedure FormCreate(Sender: TObject);
   private
     function ValidaQuantidades: boolean;
     procedure ChamaAction(AAction: TAction);
@@ -308,6 +309,18 @@ end;
 procedure TfrmMain.edtQtdeKeyPress(Sender: TObject; var Key: char);
 begin
   TestaChar(Key);
+end;
+
+procedure TfrmMain.FormCreate(Sender: TObject);
+var
+  i: integer;
+begin
+  {$IfDef MSWINDOWS}
+  for i := 0 to ComponentCount - 1 do
+    if Components[i] is TEdit then
+      TEdit(Components[i]).Text :=
+        StringReplace(TEdit(Components[i]).Text, '.', ',', [rfReplaceAll]);
+  {$EndIf}
 end;
 
 function TfrmMain.ValidaQuantidades: boolean;

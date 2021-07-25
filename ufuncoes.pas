@@ -36,8 +36,10 @@ end;
 
 procedure ConverterVirgulaPraPonto(AEdit: TEdit);
 begin
+  {$IfDef LINUX}
   AEdit.Text := StringReplace(AEdit.Text, ',', '.', [rfReplaceAll]);
   AEdit.SelStart := Length(AEdit.Text);
+  {$EndIf}
 end;
 
 procedure ProcuraEditVazia(AGroupBox: TGroupBox);
