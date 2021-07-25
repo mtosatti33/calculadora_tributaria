@@ -46,6 +46,7 @@ const
 
   //Formatador de decimais
   FORMAT = '0.00';
+  //ZERO
   ZERO = 0.00;
 implementation
 

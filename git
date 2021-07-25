@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-BRANCH=main
+BRANCH=master
 LAZARUS_PROJECT=calc_tributaria.lpi
 
 menu (){

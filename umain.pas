@@ -266,8 +266,13 @@ end;
 
 procedure TfrmMain.edtQtdeChange(Sender: TObject);
 begin
+  //Questão de Compatibilidade
   {$IfDef LINUX}
   ConverterVirgulaPraPonto(Sender as TEdit);
+  {$EndIf}
+
+  {$IfDef MSWINDOWS}
+  ConverterPontoPraVirgula(Sender as TEdit);
   {$EndIf}
 end;
 
