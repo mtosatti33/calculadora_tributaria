@@ -161,7 +161,7 @@ var
   cst: byte;
   AliqOrigem, AliqOrigemRed, AliqDestRed, AliqDest, vlrSeguro, vlrFrete,
   vlrOutras, IPIVlr, mva, vlrLiq, ICMSRed, ICMSBase, STRed, ICMSVlr,
-  STBase, IPIAliq, qtde, mult, vlrProduto, desc, STVlr: single;
+  STBase, IPIAliq, qtde, mult, vlrProduto, desc, STVlr, VlrUnit: single;
   somaValores: extended;
 begin
   //caso Negativo não calcula nada
@@ -202,11 +202,8 @@ begin
   //--------------------------------------------------------------------------
   //Campos Calculados
   //valores
-  edtVlrUnit.Text := CalculaValorUnitario(qtde, mult, vlrProduto, desc);
-  edtVlrLiq.Text := CalculaTotalLiq(vlrProduto, desc);
-
-  //Valor Liquido
-  vlrLiq := StrToFloat(edtVlrLiq.Text);
+  VlrUnit := CalculaValorUnitario(qtde, mult, vlrProduto, desc);
+  VlrLiq := CalculaTotalLiq(vlrProduto, desc);
 
   //IPI
   IPIVlr := CalculaIPI(vlrLiq, IPIAliq);
@@ -231,6 +228,8 @@ begin
 
   //--------------------------------------------------------------------------
   //Mostra os resultados
+  edtVlrUnit.Text := FormatFloat(FORMAT, VlrUnit);
+  edtVlrLiq.Text := FormatFloat(FORMAT, vlrLiq);
   edtIPIVlr.Text := FormatFloat(FORMAT, IPIVlr);
   edtRedICMS.Text := FormatFloat(FORMAT, ICMSRed);
   edtRedST.Text := FormatFloat(FORMAT, STRed);

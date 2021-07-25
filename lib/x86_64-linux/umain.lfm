@@ -6,6 +6,7 @@ object frmMain: TfrmMain
   Caption = 'Calculadora de ICMS-ST'
   ClientHeight = 456
   ClientWidth = 967
+  OnCreate = FormCreate
   Position = poScreenCenter
   LCLVersion = '2.0.6.0'
   object GroupBox1: TGroupBox

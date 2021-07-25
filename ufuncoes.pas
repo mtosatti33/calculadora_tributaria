@@ -16,8 +16,8 @@ procedure Mensagem(AValue: byte);
 procedure TestaChar(Key: char);
 
 //FUNÇOES DE CALCULOS PRA ACHAR O VALOR UNITÁRIO E LÍQUIDO
-function CalculaValorUnitario(qtde, mult, vlrTotal, desc: single): string;
-function CalculaTotalLiq(vlrProduto, desc: single): string;
+function CalculaValorUnitario(qtde, mult, vlrTotal, desc: single): single;
+function CalculaTotalLiq(vlrProduto, desc: single): Single;
 
 //FUNÇÕES DE CALCULOS DOS IMPOSTOS
 function CalculaIPI(vlrLiq, aliq: single): single;
@@ -89,20 +89,18 @@ begin
   end;
 end;
 
-function CalculaValorUnitario(qtde, mult, vlrTotal, desc: single): string;
+function CalculaValorUnitario(qtde, mult, vlrTotal, desc: single): single;
 var
-  vlrUnit, vlrLiq: single;
+  vlrLiq: single;
 begin
   vlrLiq := vlrTotal - desc;
 
-  vlrUnit := vlrLiq / (qtde * mult);
-  Result := FormatFloat(FORMAT, vlrUnit);
-
+  Result := vlrLiq / (qtde * mult);
 end;
 
-function CalculaTotalLiq(vlrProduto, desc: single): string;
+function CalculaTotalLiq(vlrProduto, desc: single): Single;
 begin
-  Result := FormatFloat(FORMAT, (vlrProduto - desc));
+  Result := vlrProduto - desc
 end;
 
 function CalculaIPI(vlrLiq, aliq: single): Single;
