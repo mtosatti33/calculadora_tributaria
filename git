@@ -1,0 +1,123 @@
+#!/usr/bin/env bash
+
+BRANCH=main
+LAZARUS_PROJECT=calc_tributaria.lpi
+
+menu (){
+	cat << EOF 
+"---------GIT INTEGRATION WITH LAZARUS-------------------
+	
+		1)      Open Lazarus Project
+		2)      View Status
+		3)      Add Modified Changes
+		4)      Commit
+		5)      Push Project
+		6)      Pull Project
+		7)      Edit .gitignore
+		8)      Stash
+		9)      Stash Restore
+		10)     Stash List
+		11)	Stash Drop
+		0, q)   Exit
+		
+--------------------------------------------------------" 
+EOF
+}
+
+press_any_key(){
+	echo ""
+	read -p "Press any Key for return the main menu"
+}
+
+while :; do
+	clear
+	
+	menu
+	read -p "Option: " option
+
+	case $option in
+	#Open Lazarus Project
+	1)
+		lazarus-ide $LAZARUS_PROJECT;;
+		
+	#View Status
+	2)
+		git status
+		
+		press_any_key;;
+		
+	#Add Modified Files
+	3)
+		git add .
+		
+		press_any_key;;
+		
+	#Commit
+	4)
+		read -p "Do you prefer a customized message[Y if Yes/Enter if No]? " answer
+
+		case $answer in
+		'y'|'Y')
+ 			read -p "Message: " message
+			git commit -m "$message";;
+		*)
+			git commit -m "Update";;
+		esac
+		
+		press_any_key;;
+		
+	#Push Project
+	5)
+		git push origin $BRANCH 
+		
+		press_any_key;;
+		
+	#Pull Project
+	6)
+		git pull origin $BRANCH
+		
+		press_any_key;;
+		
+	#Edit .gitignore
+	7)
+		vim .gitignore
+		
+		press_any_key;;
+
+    	#Stash
+	8)
+		git stash
+		
+		press_any_key;;
+
+    	#Stash Restore
+	9)
+		read -p "Choose the ID: " stash_id
+		git stash apply stash@{$stash_id}
+		
+		press_any_key;;
+
+    	#Stash List
+	10)
+		git stash list
+		
+		press_any_key;;
+
+    	#Stash Drop
+	11)
+		read -p "Choose the ID: " stash_id
+		git stash drop stash@{$stash_id}
+
+		press_any_key;;
+
+    	#Exit Script
+	0 | q)
+		exit 0;;
+
+    	*)
+        	echo "Invalid Option"
+        	sleep 2;;
+		
+	esac;
+
+done;
