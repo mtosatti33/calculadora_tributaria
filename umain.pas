@@ -267,7 +267,9 @@ end;
 
 procedure TfrmMain.edtQtdeChange(Sender: TObject);
 begin
+  {$IfDef LINUX}
   ConverterVirgulaPraPonto(Sender as TEdit);
+  {$EndIf}
 end;
 
 procedure TfrmMain.edtQtdeClick(Sender: TObject);
@@ -318,8 +320,7 @@ begin
   {$IfDef MSWINDOWS}
   for i := 0 to ComponentCount - 1 do
     if Components[i] is TEdit then
-      TEdit(Components[i]).Text :=
-        StringReplace(TEdit(Components[i]).Text, '.', ',', [rfReplaceAll]);
+        ConverterPontoPraVirgula(Components[i] as TEdit);
   {$EndIf}
 end;
 

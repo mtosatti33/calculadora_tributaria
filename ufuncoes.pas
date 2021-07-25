@@ -9,6 +9,7 @@ uses
 
 function ToFloat2(str: string): single;
 procedure ConverterVirgulaPraPonto(AEdit: TEdit);
+procedure ConverterPontoPraVirgula(AEdit: TEdit);
 procedure ProcuraEditVazia(AGroupBox: TGroupBox);
 procedure LimpaCampos(AGroupBox: TGroupBox);
 procedure Mensagem(AValue: byte);
@@ -36,10 +37,14 @@ end;
 
 procedure ConverterVirgulaPraPonto(AEdit: TEdit);
 begin
-  {$IfDef LINUX}
   AEdit.Text := StringReplace(AEdit.Text, ',', '.', [rfReplaceAll]);
   AEdit.SelStart := Length(AEdit.Text);
-  {$EndIf}
+end;
+
+procedure ConverterPontoPraVirgula(AEdit: TEdit);
+begin
+  AEdit.Text := StringReplace(AEdit.Text, '.', ',', [rfReplaceAll]);
+  AEdit.SelStart := Length(AEdit.Text);
 end;
 
 procedure ProcuraEditVazia(AGroupBox: TGroupBox);
