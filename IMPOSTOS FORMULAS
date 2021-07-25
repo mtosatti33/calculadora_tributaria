@@ -1,0 +1,20 @@
+TRIBUTAÇÃO INTEGRAL
+-------------------------------------------------------------------------
+BC ICMS 	= VALOR LIQ + FRETE + SEGURO + OUTROS
+VLR ICMS	= BC ICMS * (ALIQ / 100)
+BC ST		= (VALOR LIQ + FRETE + SEGURO + OUTROS + IPI) * (1+(MVA/100))
+VALOR ST	= (BC ST * (ALIQ DEST / 100)) - VLR ICMS
+
+TRIBUTAÇÃO REDUZIDA
+-------------------------------------------------------------------------
+BC ICMS 	= (VALOR LIQ + FRETE + SEGURO + OUTROS) * (ALIQ RED / ALIQ ORIGEM)
+VLR ICMS	= BC ICMS * (ALIQ / 100)
+BC ST		= (VALOR LIQ + FRETE + SEGURO + OUTROS + IPI) * (1+(MVA/100)) * (ALIQ RED / ALIQ ORIGEM)
+VALOR ST	= (BC ST * (ALIQ DEST / 100)) - VLR ICMS
+
+CST 51
+-------------------------------------------------------------------------
+VLR ICMS	= (BC ICMS * (ALIQ DEST / 100)) * (ALIQ RED / ALIQ ORIGEM)
+
+CST 70
+-------------------------------------------------------------------------
