@@ -28,6 +28,7 @@ function CalculaReducao(proprio, red: single): Single; overload;
 function CalculaReducao(proprio, red: string): String; overload;
 function CalculaBaseST(cst: byte; somaValores, reducao, mva: single): Single;
 function CalculaValorST(cst: byte; base, aliq, vlrICMS: single): Single;
+function CalculaValorFCP(STbase, FCPAliq: single): Single;
 
 implementation
 
@@ -181,6 +182,11 @@ begin
 
   if cst in [1, 3, 7] then
     Result := (base * (aliq / 100)) - vlrICMS;
+end;
+
+function CalculaValorFCP(STbase, FCPAliq: single): Single;
+begin
+  Result:= STbase * (FCPAliq / 100);
 end;
 
 end.

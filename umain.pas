@@ -28,6 +28,8 @@ type
     cmbCST: TComboBox;
     edtAliqOrigemRed: TEdit;
     edtRedST: TEdit;
+    edtFCPAliq: TEdit;
+    edtFCPVlr: TEdit;
     edtVlrLiq: TEdit;
     edtQtde: TEdit;
     edtIPIVlr: TEdit;
@@ -41,8 +43,6 @@ type
     edtSTBase: TEdit;
     edtSTVlr: TEdit;
     edtMult: TEdit;
-    edtCFOPUF: TEdit;
-    edtCFOPFora: TEdit;
     edtVlrUnit: TEdit;
     edtVlrProduto: TEdit;
     edtDesc: TEdit;
@@ -85,7 +85,6 @@ type
     procedure btnCalcClick(Sender: TObject);
     procedure btnClearClick(Sender: TObject);
     procedure cmbCSTChange(Sender: TObject);
-    procedure cmbCSTExit(Sender: TObject);
     procedure edtAliqOrigemExit(Sender: TObject);
     procedure edtQtdeChange(Sender: TObject);
     procedure edtQtdeClick(Sender: TObject);
@@ -118,7 +117,7 @@ var
   cst: byte;
   AliqOrigem, AliqOrigemRed, AliqDestRed, AliqDest, vlrSeguro, vlrFrete,
   vlrOutras, IPIVlr, mva, vlrLiq, ICMSRed, ICMSBase, STRed, ICMSVlr,
-  STBase, IPIAliq, qtde, mult, vlrProduto, desc, STVlr, VlrUnit: single;
+  STBase, IPIAliq, qtde, mult, vlrProduto, desc, STVlr, VlrUnit, FCPAliq, FCPVlr: single;
   somaValores: extended;
 begin
   //caso Negativo não calcula nada
@@ -154,6 +153,9 @@ begin
 
   //ST
   mva := StrToFloat(edtMVA.Text);
+
+  //FCP
+  FCPAliq:=StrToFloat(edtFCPAliq.Text);
   //--------------------------------------------------------------------------
 
   //--------------------------------------------------------------------------
@@ -182,6 +184,9 @@ begin
   //ST
   STBase := CalculaBaseST(cst, somaValores, STRed, mva);
   STVlr := CalculaValorST(cst, STBase, AliqDest, ICMSVlr);
+
+  //FCP
+  FCPVlr:=CalculaValorFCP(STBase, FCPAliq);
   //--------------------------------------------------------------------------
 
   //--------------------------------------------------------------------------
@@ -194,7 +199,9 @@ begin
   edtICMSBase.Text := FormatFloat(FORMAT, ICMSBase);
   edtICMSVlr.Text := FormatFloat(FORMAT, ICMSVlr);
   edtSTBase.Text := FormatFloat(FORMAT, STBase);
-  edtSTVlr.Text := FormatFloat(FORMAT, STVlr);
+  edtSTVlr.Text := FormatFloat(FORMAT, STVlr);    
+  edtFCPAliq.Text := FormatFloat(FORMAT, FCPAliq);
+  edtFCPVlr.Text := FormatFloat(FORMAT, FCPVlr);
 
   //CST 30 é Simples Nacional, assim como CST 90
   if cst = 3 then
@@ -224,35 +231,17 @@ end;
 
 procedure TfrmMain.cmbCSTChange(Sender: TObject);
 begin
+  lblResultCST.Caption := CST[cmbCST.Items.IndexOf(cmbCST.Text)];
   case cmbCST.ItemIndex of
     0, 1:
     begin
       edtAliqOrigemRed.Text := edtAliqOrigem.Text;
-      edtRedICMS.Text := CalculaReducao(edtAliqOrigem.Text, edtAliqOrigemRed.Text);
       edtAliqDestRed.Text := edtAliqDest.Text;
     end;
-    2, 5, 7:
+    2, 7:
       edtAliqOrigemRed.SetFocus;
-  end;
-end;
-
-procedure TfrmMain.cmbCSTExit(Sender: TObject);
-begin
-  lblResultCST.Caption := CST[cmbCST.Items.IndexOf(cmbCST.Text)];
-
-  case cmbCST.ItemIndex of
-    // CST 00, 20, 40, 51, 90
-    0, 2, 4, 5, 8:
-    begin
-      edtCFOPUF.Text := CFOP_02[0];
-      edtCFOPFora.Text := CFOP_02[1];
-    end;
-    // CST 10, 30, 60, 70
-    1, 3, 6, 7:
-    begin
-      edtCFOPUF.Text := CFOP_03[0];
-      edtCFOPFora.Text := CFOP_03[1];
-    end;
+    5:
+      edtAliqDest.SetFocus;
   end;
 end;
 
