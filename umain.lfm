@@ -650,27 +650,29 @@ object frmMain: TfrmMain
     ParentColor = False
     ParentFont = False
   end
-  object Button1: TButton
+  object btnCalc: TButton
     Left = 685
     Height = 33
     Top = 417
     Width = 70
-    Action = actCalc
     Anchors = [akRight, akBottom]
     AutoSize = True
+    Caption = '&Calcular'
+    OnClick = btnCalcClick
     TabOrder = 6
   end
-  object Button2: TButton
+  object btnClear: TButton
     Left = 757
     Height = 33
     Top = 417
     Width = 64
-    Action = actClear
     Anchors = [akRight, akBottom]
     AutoSize = True
+    Caption = '&Limpar'
+    OnClick = btnClearClick
     TabOrder = 7
   end
-  object Button3: TButton
+  object btnExit: TButton
     Left = 824
     Height = 33
     Top = 417
@@ -726,11 +728,10 @@ object frmMain: TfrmMain
     end
     object actCalc: TAction
       Caption = '&Calcular'
-      OnExecute = actCalcExecute
     end
     object actClear: TAction
       Caption = '&Limpar'
-      OnExecute = actClearExecute
+      OnExecute = actExitExecute
     end
     object actFocusOnQtde: TAction
       Caption = 'actFocusOnQtde'

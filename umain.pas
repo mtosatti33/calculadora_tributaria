@@ -1,5 +1,5 @@
 unit umain;
-//TODO: implementar o FCP - Fundo de Combate à Pobreza
+//TODO: implementar o FCP
 {$mode objfpc}{$H+}
 
 interface
@@ -22,9 +22,9 @@ type
     actFocusOnIPI: TAction;
     actFocusOnCST: TAction;
     actions: TActionList;
-    Button1: TButton;
-    Button2: TButton;
-    Button3: TButton;
+    btnCalc: TButton;
+    btnClear: TButton;
+    btnExit: TButton;
     cmbCST: TComboBox;
     edtAliqOrigemRed: TEdit;
     edtRedST: TEdit;
@@ -81,9 +81,9 @@ type
     Label7: TLabel;
     Label8: TLabel;
     Label9: TLabel;
-    procedure actCalcExecute(Sender: TObject);
-    procedure actClearExecute(Sender: TObject);
     procedure actExitExecute(Sender: TObject);
+    procedure btnCalcClick(Sender: TObject);
+    procedure btnClearClick(Sender: TObject);
     procedure cmbCSTChange(Sender: TObject);
     procedure cmbCSTExit(Sender: TObject);
     procedure edtAliqOrigemExit(Sender: TObject);
@@ -113,50 +113,7 @@ begin
   ChamaAction(Sender as TAction);
 end;
 
-procedure TfrmMain.cmbCSTChange(Sender: TObject);
-begin
-  case cmbCST.ItemIndex of
-    0, 1:
-    begin
-      edtAliqOrigemRed.Text := edtAliqOrigem.Text;
-      edtRedICMS.Text := CalculaReducao(edtAliqOrigem.Text, edtAliqOrigemRed.Text);
-      edtAliqDestRed.Text := edtAliqDest.Text;
-    end;
-    2, 5, 7:
-      edtAliqOrigemRed.SetFocus;
-  end;
-end;
-
-procedure TfrmMain.cmbCSTExit(Sender: TObject);
-begin
-  lblResultCST.Caption := CST[cmbCST.Items.IndexOf(cmbCST.Text)];
-
-  case cmbCST.ItemIndex of
-    // CST 00, 20, 40, 51, 90
-    0, 2, 4, 5, 8:
-    begin
-      edtCFOPUF.Text := CFOP_02[0];
-      edtCFOPFora.Text := CFOP_02[1];
-    end;
-    // CST 10, 30, 60, 70
-    1, 3, 6, 7:
-    begin
-      edtCFOPUF.Text := CFOP_03[0];
-      edtCFOPFora.Text := CFOP_03[1];
-    end;
-  end;
-end;
-
-procedure TfrmMain.edtAliqOrigemExit(Sender: TObject);
-var
-  vlr: single;
-begin
-  vlr := StrToFloat((Sender as TEdit).Text);
-
-  (Sender as TEdit).Text := FormatFloat(FORMAT, vlr);
-end;
-
-procedure TfrmMain.actCalcExecute(Sender: TObject);
+procedure TfrmMain.btnCalcClick(Sender: TObject);
 var
   cst: byte;
   AliqOrigem, AliqOrigemRed, AliqDestRed, AliqDest, vlrSeguro, vlrFrete,
@@ -225,6 +182,7 @@ begin
   //ST
   STBase := CalculaBaseST(cst, somaValores, STRed, mva);
   STVlr := CalculaValorST(cst, STBase, AliqDest, ICMSVlr);
+  //--------------------------------------------------------------------------
 
   //--------------------------------------------------------------------------
   //Mostra os resultados
@@ -246,7 +204,7 @@ begin
   end;
 end;
 
-procedure TfrmMain.actClearExecute(Sender: TObject);
+procedure TfrmMain.btnClearClick(Sender: TObject);
 var
   i: word;
 begin
@@ -262,6 +220,45 @@ begin
   edtQtde.SelectAll;
 
   edtMult.Text := '1';
+end;
+
+procedure TfrmMain.cmbCSTChange(Sender: TObject);
+begin
+  case cmbCST.ItemIndex of
+    0, 1:
+    begin
+      edtAliqOrigemRed.Text := edtAliqOrigem.Text;
+      edtRedICMS.Text := CalculaReducao(edtAliqOrigem.Text, edtAliqOrigemRed.Text);
+      edtAliqDestRed.Text := edtAliqDest.Text;
+    end;
+    2, 5, 7:
+      edtAliqOrigemRed.SetFocus;
+  end;
+end;
+
+procedure TfrmMain.cmbCSTExit(Sender: TObject);
+begin
+  lblResultCST.Caption := CST[cmbCST.Items.IndexOf(cmbCST.Text)];
+
+  case cmbCST.ItemIndex of
+    // CST 00, 20, 40, 51, 90
+    0, 2, 4, 5, 8:
+    begin
+      edtCFOPUF.Text := CFOP_02[0];
+      edtCFOPFora.Text := CFOP_02[1];
+    end;
+    // CST 10, 30, 60, 70
+    1, 3, 6, 7:
+    begin
+      edtCFOPUF.Text := CFOP_03[0];
+      edtCFOPFora.Text := CFOP_03[1];
+    end;
+  end;
+end;
+
+procedure TfrmMain.edtAliqOrigemExit(Sender: TObject);
+begin
+  FormataPontoFlutuante(Sender as TEdit);
 end;
 
 procedure TfrmMain.edtQtdeChange(Sender: TObject);
@@ -282,12 +279,9 @@ begin
 end;
 
 procedure TfrmMain.edtQtdeKeyDown(Sender: TObject; var Key: word; Shift: TShiftState);
-var
-  cst: byte;
 begin
   if Key = 13 then
   begin
-    cst := cmbCST.items.IndexOf(cmbCST.Text);
     if not ValidaQuantidades then
     begin
       Mensagem(MSGERROR_QTDE);
@@ -295,14 +289,12 @@ begin
     end;
 
     if Sender = edtAliqOrigem then
-      if cst in [0, 1] then
         edtAliqOrigemRed.Text := edtAliqOrigem.Text;
 
     if Sender = edtAliqOrigemRed then
       edtRedICMS.Text := CalculaReducao(edtAliqOrigem.Text, edtAliqOrigemRed.Text);
 
     if Sender = edtAliqDest then
-      if cst in [0, 1] then
         edtAliqDestRed.Text := edtAliqDest.Text;
 
     if Sender = edtAliqDestRed then
@@ -318,9 +310,12 @@ begin
 end;
 
 procedure TfrmMain.FormCreate(Sender: TObject);
+{$ifdef MSWINDOWS}
 var
   i: integer;
+{$EndIf}
 begin
+  //Necessário por questão de compatibilidade
   {$IfDef MSWINDOWS}
   for i := 0 to ComponentCount - 1 do
     if Components[i] is TEdit then
@@ -338,6 +333,10 @@ end;
 
 procedure TfrmMain.ChamaAction(AAction: TAction);
 begin
+  if AAction = actClear then
+     btnClearClick(nil);
+  if AAction = actCalc then
+     btnCalcClick(nil);
   if AAction = actFocusOnQtde then
     edtQtde.SetFocus;
   if AAction = actFocusOnVlr then

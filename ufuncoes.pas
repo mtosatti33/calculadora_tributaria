@@ -14,6 +14,7 @@ procedure ProcuraEditVazia(AGroupBox: TGroupBox);
 procedure LimpaCampos(AGroupBox: TGroupBox);
 procedure Mensagem(AValue: byte);
 procedure TestaChar(Key: char);
+procedure FormataPontoFlutuante(AEdit: TEdit);
 
 //FUNÇOES DE CALCULOS PRA ACHAR O VALOR UNITÁRIO E LÍQUIDO
 function CalculaValorUnitario(qtde, mult, vlrTotal, desc: single): single;
@@ -89,13 +90,18 @@ begin
   end;
 end;
 
-function CalculaValorUnitario(qtde, mult, vlrTotal, desc: single): single;
+procedure FormataPontoFlutuante(AEdit: TEdit);
 var
-  vlrLiq: single;
+  vlr: single;
 begin
-  vlrLiq := vlrTotal - desc;
+  vlr := StrToFloat(AEdit.Text);
 
-  Result := vlrLiq / (qtde * mult);
+  AEdit.Text := FormatFloat(FORMAT, vlr);
+end;
+
+function CalculaValorUnitario(qtde, mult, vlrTotal, desc: single): single;
+begin
+  Result := (vlrTotal - desc) / (qtde * mult);
 end;
 
 function CalculaTotalLiq(vlrProduto, desc: single): Single;
@@ -123,7 +129,6 @@ begin
     Result := somaValores
   else
     Result := somaValores * (1 - (reducao / 100));
-
 end;
 
 function CalculaValorICMS(cst: byte; base, aliq, aliqDest: single): Single;
@@ -133,7 +138,6 @@ begin
     Result := base * (aliq / 100)
   else
     Result := base * (aliqDest / 100);
-
 end;
 
 function CalculaReducao(proprio, red: single): Single;
@@ -169,7 +173,6 @@ begin
 
   if cst in [1, 3, 7] then
     Result := somaValores * (1 + mva / 100) * (1 - (reducao / 100));
-
 end;
 
 function CalculaValorST(cst: byte; base, aliq, vlrICMS: single): Single;
@@ -178,7 +181,6 @@ begin
 
   if cst in [1, 3, 7] then
     Result := (base * (aliq / 100)) - vlrICMS;
-
 end;
 
 end.
