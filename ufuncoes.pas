@@ -7,7 +7,7 @@ interface
 uses
   Classes, SysUtils, StdCtrls, uconstantes, Dialogs;
 
-function ToFloat2(str: string): single;
+//FUNÇÕES GERAIS
 procedure ConverterVirgulaPraPonto(AEdit: TEdit);
 procedure ConverterPontoPraVirgula(AEdit: TEdit);
 procedure ProcuraEditVazia(AGroupBox: TGroupBox);
@@ -17,7 +17,7 @@ procedure TestaChar(Key: char);
 procedure FormataPontoFlutuante(AEdit: TEdit);
 
 //FUNÇOES DE CALCULOS PRA ACHAR O VALOR UNITÁRIO E LÍQUIDO
-function CalculaValorUnitario(qtde, mult, vlrTotal, desc: single): single;
+function CalculaValorUnitario(qtde, mult, vlrLiq: single): single;
 function CalculaTotalLiq(vlrProduto, desc: single): Single;
 
 //FUNÇÕES DE CALCULOS DOS IMPOSTOS
@@ -31,11 +31,6 @@ function CalculaValorST(cst: byte; base, aliq, vlrICMS: single): Single;
 function CalculaValorFCP(STbase, FCPAliq: single): Single;
 
 implementation
-
-function ToFloat2(str: string): single;
-begin
-  Result := StrToFloat(str);
-end;
 
 procedure ConverterVirgulaPraPonto(AEdit: TEdit);
 begin
@@ -92,17 +87,13 @@ begin
 end;
 
 procedure FormataPontoFlutuante(AEdit: TEdit);
-var
-  vlr: single;
 begin
-  vlr := StrToFloat(AEdit.Text);
-
-  AEdit.Text := FormatFloat(FORMAT, vlr);
+  AEdit.Text := FormatFloat(FORMAT, StrToFloat(AEdit.Text));
 end;
 
-function CalculaValorUnitario(qtde, mult, vlrTotal, desc: single): single;
+function CalculaValorUnitario(qtde, mult, vlrLiq: single): single;
 begin
-  Result := (vlrTotal - desc) / (qtde * mult);
+  Result := vlrLiq / (qtde * mult);
 end;
 
 function CalculaTotalLiq(vlrProduto, desc: single): Single;
@@ -122,12 +113,9 @@ end;
 //FUNÇÕES DE CÁLCULOS
 function CalculaBaseICMS(cst: byte; somaValores, reducao: single): Single;
 begin
-  Result := ZERO;
   //Se enquadrar nesses quisitos não se calcula o ICMS
   if cst in [4, 6, 8] then
     Result := ZERO
-  else if cst = 5 then
-    Result := somaValores
   else
     Result := somaValores * (1 - (reducao / 100));
 end;

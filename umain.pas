@@ -161,8 +161,8 @@ begin
   //--------------------------------------------------------------------------
   //Campos Calculados
   //valores
-  VlrUnit := CalculaValorUnitario(qtde, mult, vlrProduto, desc);
   VlrLiq := CalculaTotalLiq(vlrProduto, desc);
+  VlrUnit := CalculaValorUnitario(qtde, mult, vlrLiq);
 
   //IPI
   IPIVlr := CalculaIPI(vlrLiq, IPIAliq);
@@ -241,7 +241,10 @@ begin
     2, 7:
       edtAliqOrigemRed.SetFocus;
     5:
+    begin
+      edtAliqOrigemRed.Text:=edtAliqOrigem.Text;
       edtAliqDest.SetFocus;
+    end;
   end;
 end;
 

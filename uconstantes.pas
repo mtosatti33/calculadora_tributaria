@@ -20,6 +20,7 @@ const
     'ICMS Reduzido e ST Recolhida na Fonte',
     'Outras'
     );
+
   CFOP_02: array [0..1] of string = ('1102', '2102');
   CFOP_03: array [0..1] of string = ('1403', '2403');
 
