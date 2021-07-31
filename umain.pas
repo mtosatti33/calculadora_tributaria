@@ -21,21 +21,22 @@ type
     actFocusOnQtde: TAction;
     actFocusOnIPI: TAction;
     actFocusOnCST: TAction;
+    actFocusOnAliqST: TAction;
     actions: TActionList;
     btnCalc: TButton;
     btnClear: TButton;
     btnExit: TButton;
     cmbCST: TComboBox;
+    edtAliqDest: TEdit;
+    edtAliqDestRed: TEdit;
     edtAliqOrigemRed: TEdit;
-    edtRedST: TEdit;
     edtFCPAliq: TEdit;
     edtFCPVlr: TEdit;
+    edtRedST: TEdit;
     edtVlrLiq: TEdit;
     edtQtde: TEdit;
     edtIPIVlr: TEdit;
     edtAliqOrigem: TEdit;
-    edtAliqDest: TEdit;
-    edtAliqDestRed: TEdit;
     edtRedICMS: TEdit;
     edtICMSBase: TEdit;
     edtICMSVlr: TEdit;
@@ -54,14 +55,12 @@ type
     GroupBox2: TGroupBox;
     GroupBox3: TGroupBox;
     GroupBox4: TGroupBox;
-    GroupBox5: TGroupBox;
     Label1: TLabel;
     Label10: TLabel;
     Label11: TLabel;
     Label12: TLabel;
     Label13: TLabel;
     Label14: TLabel;
-    Label15: TLabel;
     Label16: TLabel;
     Label17: TLabel;
     Label18: TLabel;
@@ -73,7 +72,7 @@ type
     Label23: TLabel;
     Label24: TLabel;
     Label25: TLabel;
-    lblResultCST: TLabel;
+    Label26: TLabel;
     Label3: TLabel;
     Label4: TLabel;
     Label5: TLabel;
@@ -81,6 +80,7 @@ type
     Label7: TLabel;
     Label8: TLabel;
     Label9: TLabel;
+    lblResultCST: TLabel;
     procedure actExitExecute(Sender: TObject);
     procedure btnCalcClick(Sender: TObject);
     procedure btnClearClick(Sender: TObject);
@@ -231,7 +231,8 @@ end;
 
 procedure TfrmMain.cmbCSTChange(Sender: TObject);
 begin
-  lblResultCST.Caption := CST[cmbCST.Items.IndexOf(cmbCST.Text)];
+  if cmbCST.Items.IndexOf(cmbCST.Text) <> -1 then
+     lblResultCST.Caption := CST[cmbCST.Items.IndexOf(cmbCST.Text)];
   case cmbCST.ItemIndex of
     0, 1:
     begin
@@ -341,6 +342,8 @@ begin
     edtMVA.SetFocus;
   if AAction = actFocusOnCST then
     cmbCST.SetFocus;
+  if AAction = actFocusOnAliqST then
+     edtAliqDest.SetFocus;
   if AAction = actExit then
     Application.Terminate;
 end;

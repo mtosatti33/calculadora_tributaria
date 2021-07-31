@@ -107,7 +107,6 @@ begin
 
   if aliq > 0 then
     Result := vlrLiq * (aliq / 100);
-
 end;
 
 //FUNÇÕES DE CÁLCULOS

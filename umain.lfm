@@ -1,22 +1,22 @@
 object frmMain: TfrmMain
-  Left = 306
-  Height = 411
-  Top = 183
-  Width = 969
+  Left = 420
+  Height = 554
+  Top = 111
+  Width = 699
   Caption = 'Calculadora de ICMS-ST'
-  ClientHeight = 411
-  ClientWidth = 969
+  ClientHeight = 554
+  ClientWidth = 699
   OnCreate = FormCreate
   Position = poScreenCenter
   LCLVersion = '2.0.6.0'
   object GroupBox1: TGroupBox
     Left = 8
-    Height = 352
+    Height = 168
     Top = 0
-    Width = 232
+    Width = 680
     Caption = 'Produtos'
-    ClientHeight = 334
-    ClientWidth = 230
+    ClientHeight = 150
+    ClientWidth = 678
     TabOrder = 0
     object Label1: TLabel
       Left = 15
@@ -30,9 +30,9 @@ object frmMain: TfrmMain
       WordWrap = True
     end
     object Label3: TLabel
-      Left = 13
+      Left = 232
       Height = 31
-      Top = 48
+      Top = 8
       Width = 56
       AutoSize = False
       Caption = 'Valor Unitário'
@@ -40,9 +40,9 @@ object frmMain: TfrmMain
       WordWrap = True
     end
     object Label4: TLabel
-      Left = 13
+      Left = 464
       Height = 32
-      Top = 88
+      Top = 8
       Width = 67
       AutoSize = False
       Caption = '&2 - Vlr do Produto'
@@ -75,9 +75,9 @@ object frmMain: TfrmMain
       Text = '1'
     end
     object edtVlrUnit: TEdit
-      Left = 89
+      Left = 308
       Height = 33
-      Top = 48
+      Top = 8
       Width = 125
       OnChange = edtQtdeChange
       OnClick = edtQtdeClick
@@ -89,9 +89,9 @@ object frmMain: TfrmMain
       Text = '0.00'
     end
     object edtVlrProduto: TEdit
-      Left = 89
+      Left = 540
       Height = 33
-      Top = 88
+      Top = 8
       Width = 125
       OnChange = edtQtdeChange
       OnClick = edtQtdeClick
@@ -103,9 +103,9 @@ object frmMain: TfrmMain
       Text = '100.00'
     end
     object Label5: TLabel
-      Left = 13
+      Left = 15
       Height = 15
-      Top = 128
+      Top = 48
       Width = 64
       Caption = 'Desconto'
       ParentColor = False
@@ -113,7 +113,7 @@ object frmMain: TfrmMain
     object edtDesc: TEdit
       Left = 89
       Height = 33
-      Top = 128
+      Top = 48
       Width = 125
       OnChange = edtQtdeChange
       OnClick = edtQtdeClick
@@ -124,17 +124,38 @@ object frmMain: TfrmMain
       Text = '0.00'
     end
     object Label6: TLabel
-      Left = 13
+      Left = 232
       Height = 15
-      Top = 208
+      Top = 48
       Width = 35
       Caption = 'Frete'
       ParentColor = False
     end
     object edtFrete: TEdit
-      Left = 89
+      Left = 308
       Height = 33
-      Top = 208
+      Top = 48
+      Width = 125
+      OnChange = edtQtdeChange
+      OnClick = edtQtdeClick
+      OnExit = edtAliqOrigemExit
+      OnKeyDown = edtQtdeKeyDown
+      OnKeyPress = edtQtdeKeyPress
+      TabOrder = 5
+      Text = '0.00'
+    end
+    object Label7: TLabel
+      Left = 464
+      Height = 15
+      Top = 48
+      Width = 47
+      Caption = 'Seguro'
+      ParentColor = False
+    end
+    object edtSeguro: TEdit
+      Left = 540
+      Height = 33
+      Top = 48
       Width = 125
       OnChange = edtQtdeChange
       OnClick = edtQtdeClick
@@ -144,31 +165,10 @@ object frmMain: TfrmMain
       TabOrder = 6
       Text = '0.00'
     end
-    object Label7: TLabel
-      Left = 13
-      Height = 15
-      Top = 248
-      Width = 47
-      Caption = 'Seguro'
-      ParentColor = False
-    end
-    object edtSeguro: TEdit
-      Left = 89
-      Height = 33
-      Top = 248
-      Width = 125
-      OnChange = edtQtdeChange
-      OnClick = edtQtdeClick
-      OnExit = edtAliqOrigemExit
-      OnKeyDown = edtQtdeKeyDown
-      OnKeyPress = edtQtdeKeyPress
-      TabOrder = 7
-      Text = '0.00'
-    end
     object Label8: TLabel
       Left = 13
       Height = 32
-      Top = 288
+      Top = 88
       Width = 65
       AutoSize = False
       Caption = 'Outras Despesas'
@@ -178,14 +178,14 @@ object frmMain: TfrmMain
     object edtOutras: TEdit
       Left = 89
       Height = 33
-      Top = 288
+      Top = 88
       Width = 125
       OnChange = edtQtdeChange
       OnClick = edtQtdeClick
       OnExit = edtAliqOrigemExit
       OnKeyDown = edtQtdeKeyDown
       OnKeyPress = edtQtdeKeyPress
-      TabOrder = 8
+      TabOrder = 7
       Text = '0.00'
     end
     object Label2: TLabel
@@ -197,9 +197,9 @@ object frmMain: TfrmMain
       ParentColor = False
     end
     object Label23: TLabel
-      Left = 13
+      Left = 465
       Height = 30
-      Top = 168
+      Top = 88
       Width = 55
       AutoSize = False
       Caption = 'Valor Liquido'
@@ -209,174 +209,7 @@ object frmMain: TfrmMain
       WordWrap = True
     end
     object edtVlrLiq: TEdit
-      Left = 88
-      Height = 33
-      Top = 168
-      Width = 125
-      Font.Style = [fsBold]
-      OnChange = edtQtdeChange
-      OnClick = edtQtdeClick
-      OnKeyDown = edtQtdeKeyDown
-      OnKeyPress = edtQtdeKeyPress
-      ParentFont = False
-      ReadOnly = True
-      TabStop = False
-      TabOrder = 5
-      Text = '0.00'
-    end
-  end
-  object GroupBox2: TGroupBox
-    Left = 248
-    Height = 120
-    Top = 0
-    Width = 232
-    Caption = 'IPI'
-    ClientHeight = 102
-    ClientWidth = 230
-    TabOrder = 1
-    object Label9: TLabel
-      Left = 13
-      Height = 15
-      Top = 8
-      Width = 76
-      Caption = '&3 - Aliquota'
-      ParentColor = False
-      ParentFont = False
-    end
-    object edtIPIAliq: TEdit
-      Left = 89
-      Height = 33
-      Top = 8
-      Width = 125
-      OnChange = edtQtdeChange
-      OnClick = edtQtdeClick
-      OnExit = edtAliqOrigemExit
-      OnKeyDown = edtQtdeKeyDown
-      OnKeyPress = edtQtdeKeyPress
-      TabOrder = 0
-      Text = '0.00'
-    end
-    object Label10: TLabel
-      Left = 13
-      Height = 15
-      Top = 48
-      Width = 38
-      Caption = 'Valor'
-      Font.Style = [fsBold]
-      ParentColor = False
-      ParentFont = False
-    end
-    object edtIPIVlr: TEdit
-      Left = 89
-      Height = 33
-      Top = 48
-      Width = 125
-      Font.Style = [fsBold]
-      OnChange = edtQtdeChange
-      OnClick = edtQtdeClick
-      OnKeyDown = edtQtdeKeyDown
-      OnKeyPress = edtQtdeKeyPress
-      ParentFont = False
-      ReadOnly = True
-      TabStop = False
-      TabOrder = 1
-      Text = '0.00'
-    end
-  end
-  object GroupBox3: TGroupBox
-    Left = 248
-    Height = 232
-    Top = 120
-    Width = 472
-    Caption = 'ICMS'
-    ClientHeight = 214
-    ClientWidth = 470
-    TabOrder = 2
-    OnKeyDown = edtQtdeKeyDown
-    object Label12: TLabel
-      Left = 16
-      Height = 32
-      Top = 8
-      Width = 52
-      AutoSize = False
-      Caption = '&4 - Aliq. Próprio'
-      ParentColor = False
-      ParentFont = False
-      WordWrap = True
-    end
-    object edtAliqOrigem: TEdit
-      Left = 91
-      Height = 33
-      Top = 8
-      Width = 125
-      OnChange = edtQtdeChange
-      OnClick = edtQtdeClick
-      OnExit = edtAliqOrigemExit
-      OnKeyDown = edtQtdeKeyDown
-      OnKeyPress = edtQtdeKeyPress
-      TabOrder = 0
-      Text = '12.00'
-    end
-    object Label13: TLabel
-      Left = 256
-      Height = 32
-      Top = 8
-      Width = 63
-      AutoSize = False
-      Caption = 'Aliq. ST'
-      ParentColor = False
-      WordWrap = True
-    end
-    object edtAliqDest: TEdit
-      Left = 332
-      Height = 33
-      Top = 8
-      Width = 125
-      OnChange = edtQtdeChange
-      OnClick = edtQtdeClick
-      OnExit = edtAliqOrigemExit
-      OnKeyDown = edtQtdeKeyDown
-      OnKeyPress = edtQtdeKeyPress
-      TabOrder = 3
-      Text = '12.00'
-    end
-    object Label14: TLabel
-      Left = 257
-      Height = 32
-      Top = 48
-      Width = 70
-      AutoSize = False
-      Caption = 'Aliq. Red. ST'
-      ParentColor = False
-      WordWrap = True
-    end
-    object edtAliqDestRed: TEdit
-      Left = 332
-      Height = 33
-      Top = 48
-      Width = 125
-      OnChange = edtQtdeChange
-      OnClick = edtQtdeClick
-      OnExit = edtAliqOrigemExit
-      OnKeyDown = edtQtdeKeyDown
-      OnKeyPress = edtQtdeKeyPress
-      TabOrder = 4
-      Text = '12.00'
-    end
-    object Label15: TLabel
-      Left = 16
-      Height = 32
-      Top = 88
-      Width = 70
-      AutoSize = False
-      Caption = 'Red Proprio %'
-      Font.Style = [fsBold]
-      ParentColor = False
-      ParentFont = False
-      WordWrap = True
-    end
-    object edtRedICMS: TEdit
-      Left = 91
+      Left = 540
       Height = 33
       Top = 88
       Width = 125
@@ -388,316 +221,13 @@ object frmMain: TfrmMain
       ParentFont = False
       ReadOnly = True
       TabStop = False
-      TabOrder = 2
+      TabOrder = 9
       Text = '0.00'
-    end
-    object Label16: TLabel
-      Left = 16
-      Height = 32
-      Top = 168
-      Width = 52
-      AutoSize = False
-      Caption = 'Base ICMS'
-      Font.Style = [fsBold]
-      ParentColor = False
-      ParentFont = False
-      WordWrap = True
-    end
-    object edtICMSBase: TEdit
-      Left = 91
-      Height = 33
-      Top = 168
-      Width = 125
-      Font.Style = [fsBold]
-      OnChange = edtQtdeChange
-      OnClick = edtQtdeClick
-      OnKeyDown = edtQtdeKeyDown
-      OnKeyPress = edtQtdeKeyPress
-      ParentFont = False
-      ReadOnly = True
-      TabStop = False
-      TabOrder = 6
-      Text = '0.00'
-    end
-    object Label17: TLabel
-      Left = 257
-      Height = 32
-      Top = 168
-      Width = 60
-      AutoSize = False
-      Caption = 'Valor ICMS'
-      Font.Style = [fsBold]
-      ParentColor = False
-      ParentFont = False
-      WordWrap = True
-    end
-    object edtICMSVlr: TEdit
-      Left = 332
-      Height = 33
-      Top = 168
-      Width = 125
-      Font.Style = [fsBold]
-      OnChange = edtQtdeChange
-      OnClick = edtQtdeClick
-      OnKeyDown = edtQtdeKeyDown
-      OnKeyPress = edtQtdeKeyPress
-      ParentFont = False
-      ReadOnly = True
-      TabStop = False
-      TabOrder = 7
-      Text = '0.00'
-    end
-    object Label24: TLabel
-      Left = 16
-      Height = 32
-      Top = 48
-      Width = 70
-      AutoSize = False
-      Caption = 'Aliq. Red. Proprio'
-      ParentColor = False
-      WordWrap = True
-    end
-    object edtAliqOrigemRed: TEdit
-      Left = 91
-      Height = 33
-      Top = 48
-      Width = 125
-      OnChange = edtQtdeChange
-      OnClick = edtQtdeClick
-      OnExit = edtAliqOrigemExit
-      OnKeyDown = edtQtdeKeyDown
-      OnKeyPress = edtQtdeKeyPress
-      TabOrder = 1
-      Text = '12.00'
-    end
-    object edtRedST: TEdit
-      Left = 332
-      Height = 33
-      Top = 88
-      Width = 125
-      Font.Style = [fsBold]
-      OnChange = edtQtdeChange
-      OnClick = edtQtdeClick
-      OnKeyDown = edtQtdeKeyDown
-      OnKeyPress = edtQtdeKeyPress
-      ParentFont = False
-      ReadOnly = True
-      TabStop = False
-      TabOrder = 5
-      Text = '0.00'
-    end
-    object Label25: TLabel
-      Left = 257
-      Height = 32
-      Top = 88
-      Width = 70
-      AutoSize = False
-      Caption = 'Red ST %'
-      Font.Style = [fsBold]
-      ParentColor = False
-      ParentFont = False
-      WordWrap = True
-    end
-  end
-  object GroupBox4: TGroupBox
-    Left = 728
-    Height = 352
-    Top = 0
-    Width = 232
-    Caption = 'ST'
-    ClientHeight = 334
-    ClientWidth = 230
-    TabOrder = 3
-    object Label18: TLabel
-      Left = 16
-      Height = 15
-      Top = 8
-      Width = 66
-      Caption = '&5 - MVA %'
-      ParentColor = False
-      ParentFont = False
-    end
-    object edtMVA: TEdit
-      Left = 92
-      Height = 33
-      Top = 8
-      Width = 125
-      OnChange = edtQtdeChange
-      OnClick = edtQtdeClick
-      OnExit = edtAliqOrigemExit
-      OnKeyDown = edtQtdeKeyDown
-      OnKeyPress = edtQtdeKeyPress
-      TabOrder = 0
-      Text = '0.00'
-    end
-    object Label19: TLabel
-      Left = 16
-      Height = 15
-      Top = 128
-      Width = 55
-      Caption = 'Base ST'
-      Font.Style = [fsBold]
-      ParentColor = False
-      ParentFont = False
-    end
-    object edtSTBase: TEdit
-      Left = 92
-      Height = 33
-      Top = 127
-      Width = 125
-      Font.Style = [fsBold]
-      OnChange = edtQtdeChange
-      OnClick = edtQtdeClick
-      OnKeyDown = edtQtdeKeyDown
-      OnKeyPress = edtQtdeKeyPress
-      ParentFont = False
-      ReadOnly = True
-      TabStop = False
-      TabOrder = 1
-      Text = '0.00'
-    end
-    object Label20: TLabel
-      Left = 16
-      Height = 15
-      Top = 165
-      Width = 59
-      Caption = 'Valor ST'
-      Font.Style = [fsBold]
-      ParentColor = False
-      ParentFont = False
-    end
-    object edtSTVlr: TEdit
-      Left = 92
-      Height = 33
-      Top = 165
-      Width = 125
-      Font.Style = [fsBold]
-      OnChange = edtQtdeChange
-      OnClick = edtQtdeClick
-      OnKeyDown = edtQtdeKeyDown
-      OnKeyPress = edtQtdeKeyPress
-      ParentFont = False
-      ReadOnly = True
-      TabStop = False
-      TabOrder = 2
-      Text = '0.00'
-    end
-    object edtFCPAliq: TEdit
-      Left = 92
-      Height = 33
-      Top = 250
-      Width = 125
-      OnChange = edtQtdeChange
-      OnClick = edtQtdeClick
-      OnKeyDown = edtQtdeKeyDown
-      OnKeyPress = edtQtdeKeyPress
-      ParentFont = False
-      TabStop = False
-      TabOrder = 3
-      Text = '0.00'
-    end
-    object edtFCPVlr: TEdit
-      Left = 92
-      Height = 33
-      Top = 288
-      Width = 125
-      Font.Style = [fsBold]
-      OnChange = edtQtdeChange
-      OnClick = edtQtdeClick
-      OnKeyDown = edtQtdeKeyDown
-      OnKeyPress = edtQtdeKeyPress
-      ParentFont = False
-      ReadOnly = True
-      TabStop = False
-      TabOrder = 4
-      Text = '0.00'
-    end
-    object Label21: TLabel
-      Left = 16
-      Height = 15
-      Top = 250
-      Width = 56
-      Caption = 'Aliq FCP'
-      ParentColor = False
-      ParentFont = False
-    end
-    object Label22: TLabel
-      Left = 16
-      Height = 15
-      Top = 288
-      Width = 69
-      Caption = 'Valor FCP'
-      Font.Style = [fsBold]
-      ParentColor = False
-      ParentFont = False
-    end
-  end
-  object lblResultCST: TLabel
-    Left = 330
-    Height = 19
-    Top = 379
-    Width = 351
-    Alignment = taRightJustify
-    Anchors = [akRight, akBottom]
-    Caption = 'Seleciona na Opção Acima o CST Definido'
-    Font.Height = -17
-    Font.Name = 'Sans'
-    ParentColor = False
-    ParentFont = False
-  end
-  object btnCalc: TButton
-    Left = 687
-    Height = 33
-    Top = 372
-    Width = 70
-    Anchors = [akRight, akBottom]
-    AutoSize = True
-    Caption = '&Calcular'
-    OnClick = btnCalcClick
-    TabOrder = 4
-  end
-  object btnClear: TButton
-    Left = 759
-    Height = 33
-    Top = 372
-    Width = 64
-    Anchors = [akRight, akBottom]
-    AutoSize = True
-    Caption = '&Limpar'
-    OnClick = btnClearClick
-    TabOrder = 5
-  end
-  object btnExit: TButton
-    Left = 826
-    Height = 33
-    Top = 372
-    Width = 133
-    Action = actExit
-    Anchors = [akRight, akBottom]
-    AutoSize = True
-    TabOrder = 6
-  end
-  object GroupBox5: TGroupBox
-    Left = 488
-    Height = 112
-    Top = 8
-    Width = 232
-    ClientHeight = 110
-    ClientWidth = 230
-    TabOrder = 7
-    object Label11: TLabel
-      Left = 16
-      Height = 15
-      Top = 16
-      Width = 43
-      Caption = '&6 - CST'
-      ParentColor = False
-      ParentFont = False
     end
     object cmbCST: TComboBox
-      Left = 92
+      Left = 308
       Height = 33
-      Top = 16
+      Top = 88
       Width = 125
       ItemHeight = 0
       ItemIndex = 0
@@ -715,13 +245,467 @@ object frmMain: TfrmMain
       OnChange = cmbCSTChange
       OnKeyDown = edtQtdeKeyDown
       OnKeyPress = edtQtdeKeyPress
-      TabOrder = 0
+      TabOrder = 8
       Text = '00'
     end
+    object Label11: TLabel
+      Left = 232
+      Height = 15
+      Top = 88
+      Width = 43
+      Caption = '&3 - CST'
+      ParentColor = False
+      ParentFont = False
+    end
+    object lblResultCST: TLabel
+      Left = 233
+      Height = 13
+      Top = 128
+      Width = 251
+      Caption = 'Seleciona na Opção Acima o CST Definido'
+      Font.Height = -12
+      Font.Name = 'Sans'
+      ParentColor = False
+      ParentFont = False
+    end
+  end
+  object GroupBox2: TGroupBox
+    Left = 8
+    Height = 72
+    Top = 280
+    Width = 680
+    Caption = 'IPI'
+    ClientHeight = 54
+    ClientWidth = 678
+    TabOrder = 2
+    object Label9: TLabel
+      Left = 13
+      Height = 15
+      Top = 8
+      Width = 49
+      Caption = '&5 - Aliq.'
+      ParentColor = False
+      ParentFont = False
+    end
+    object edtIPIAliq: TEdit
+      Left = 89
+      Height = 33
+      Top = 8
+      Width = 61
+      OnChange = edtQtdeChange
+      OnClick = edtQtdeClick
+      OnExit = edtAliqOrigemExit
+      OnKeyDown = edtQtdeKeyDown
+      OnKeyPress = edtQtdeKeyPress
+      TabOrder = 0
+      Text = '0.00'
+    end
+    object Label10: TLabel
+      Left = 233
+      Height = 15
+      Top = 8
+      Width = 38
+      Caption = 'Valor'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+    end
+    object edtIPIVlr: TEdit
+      Left = 308
+      Height = 33
+      Top = 8
+      Width = 125
+      Font.Style = [fsBold]
+      OnChange = edtQtdeChange
+      OnClick = edtQtdeClick
+      OnKeyDown = edtQtdeKeyDown
+      OnKeyPress = edtQtdeKeyPress
+      ParentFont = False
+      ReadOnly = True
+      TabStop = False
+      TabOrder = 1
+      Text = '0.00'
+    end
+  end
+  object GroupBox3: TGroupBox
+    Left = 8
+    Height = 112
+    Top = 168
+    Width = 680
+    Caption = 'ICMS'
+    ClientHeight = 94
+    ClientWidth = 678
+    TabOrder = 1
+    OnKeyDown = edtQtdeKeyDown
+    object Label12: TLabel
+      Left = 16
+      Height = 32
+      Top = 8
+      Width = 52
+      AutoSize = False
+      Caption = '&4 - Aliq. Próprio'
+      ParentColor = False
+      ParentFont = False
+      WordWrap = True
+    end
+    object edtAliqOrigem: TEdit
+      Left = 89
+      Height = 33
+      Top = 8
+      Width = 125
+      OnChange = edtQtdeChange
+      OnClick = edtQtdeClick
+      OnExit = edtAliqOrigemExit
+      OnKeyDown = edtQtdeKeyDown
+      OnKeyPress = edtQtdeKeyPress
+      TabOrder = 0
+      Text = '12.00'
+    end
+    object edtRedICMS: TEdit
+      Left = 540
+      Height = 33
+      Top = 7
+      Width = 125
+      Font.Style = [fsBold]
+      OnChange = edtQtdeChange
+      OnClick = edtQtdeClick
+      OnKeyDown = edtQtdeKeyDown
+      OnKeyPress = edtQtdeKeyPress
+      ParentFont = False
+      ReadOnly = True
+      TabStop = False
+      TabOrder = 2
+      Text = '0.00'
+    end
+    object Label16: TLabel
+      Left = 14
+      Height = 32
+      Top = 48
+      Width = 52
+      AutoSize = False
+      Caption = 'Base ICMS'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+      WordWrap = True
+    end
+    object edtICMSBase: TEdit
+      Left = 89
+      Height = 33
+      Top = 48
+      Width = 125
+      Font.Style = [fsBold]
+      OnChange = edtQtdeChange
+      OnClick = edtQtdeClick
+      OnKeyDown = edtQtdeKeyDown
+      OnKeyPress = edtQtdeKeyPress
+      ParentFont = False
+      ReadOnly = True
+      TabStop = False
+      TabOrder = 3
+      Text = '0.00'
+    end
+    object Label17: TLabel
+      Left = 232
+      Height = 32
+      Top = 47
+      Width = 60
+      AutoSize = False
+      Caption = 'Valor ICMS'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+      WordWrap = True
+    end
+    object edtICMSVlr: TEdit
+      Left = 308
+      Height = 33
+      Top = 47
+      Width = 125
+      Font.Style = [fsBold]
+      OnChange = edtQtdeChange
+      OnClick = edtQtdeClick
+      OnKeyDown = edtQtdeKeyDown
+      OnKeyPress = edtQtdeKeyPress
+      ParentFont = False
+      ReadOnly = True
+      TabStop = False
+      TabOrder = 4
+      Text = '0.00'
+    end
+    object Label24: TLabel
+      Left = 232
+      Height = 32
+      Top = 8
+      Width = 70
+      AutoSize = False
+      Caption = 'Aliq. Red. Proprio'
+      ParentColor = False
+      WordWrap = True
+    end
+    object edtAliqOrigemRed: TEdit
+      Left = 308
+      Height = 33
+      Top = 8
+      Width = 125
+      OnChange = edtQtdeChange
+      OnClick = edtQtdeClick
+      OnExit = edtAliqOrigemExit
+      OnKeyDown = edtQtdeKeyDown
+      OnKeyPress = edtQtdeKeyPress
+      TabOrder = 1
+      Text = '12.00'
+    end
+    object Label25: TLabel
+      Left = 464
+      Height = 32
+      Top = 7
+      Width = 70
+      AutoSize = False
+      Caption = 'Red %'
+      ParentColor = False
+      WordWrap = True
+    end
+  end
+  object GroupBox4: TGroupBox
+    Left = 8
+    Height = 152
+    Top = 352
+    Width = 680
+    Caption = 'ST'
+    ClientHeight = 134
+    ClientWidth = 678
+    TabOrder = 3
+    object Label18: TLabel
+      Left = 13
+      Height = 15
+      Top = 48
+      Width = 66
+      Caption = '&7 - MVA %'
+      ParentColor = False
+      ParentFont = False
+    end
+    object edtMVA: TEdit
+      Left = 89
+      Height = 33
+      Top = 48
+      Width = 125
+      OnChange = edtQtdeChange
+      OnClick = edtQtdeClick
+      OnExit = edtAliqOrigemExit
+      OnKeyDown = edtQtdeKeyDown
+      OnKeyPress = edtQtdeKeyPress
+      TabOrder = 3
+      Text = '0.00'
+    end
+    object Label19: TLabel
+      Left = 232
+      Height = 15
+      Top = 49
+      Width = 55
+      Caption = 'Base ST'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+    end
+    object edtSTBase: TEdit
+      Left = 308
+      Height = 33
+      Top = 48
+      Width = 125
+      Font.Style = [fsBold]
+      OnChange = edtQtdeChange
+      OnClick = edtQtdeClick
+      OnKeyDown = edtQtdeKeyDown
+      OnKeyPress = edtQtdeKeyPress
+      ParentFont = False
+      ReadOnly = True
+      TabStop = False
+      TabOrder = 4
+      Text = '0.00'
+    end
+    object Label20: TLabel
+      Left = 464
+      Height = 15
+      Top = 48
+      Width = 59
+      Caption = 'Valor ST'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+    end
+    object edtSTVlr: TEdit
+      Left = 540
+      Height = 33
+      Top = 47
+      Width = 125
+      Font.Style = [fsBold]
+      OnChange = edtQtdeChange
+      OnClick = edtQtdeClick
+      OnKeyDown = edtQtdeKeyDown
+      OnKeyPress = edtQtdeKeyPress
+      ParentFont = False
+      ReadOnly = True
+      TabStop = False
+      TabOrder = 5
+      Text = '0.00'
+    end
+    object edtFCPAliq: TEdit
+      Left = 89
+      Height = 33
+      Top = 88
+      Width = 125
+      OnChange = edtQtdeChange
+      OnClick = edtQtdeClick
+      OnKeyDown = edtQtdeKeyDown
+      OnKeyPress = edtQtdeKeyPress
+      ParentFont = False
+      TabOrder = 6
+      Text = '0.00'
+    end
+    object edtFCPVlr: TEdit
+      Left = 308
+      Height = 33
+      Top = 88
+      Width = 125
+      Font.Style = [fsBold]
+      OnChange = edtQtdeChange
+      OnClick = edtQtdeClick
+      OnKeyDown = edtQtdeKeyDown
+      OnKeyPress = edtQtdeKeyPress
+      ParentFont = False
+      ReadOnly = True
+      TabStop = False
+      TabOrder = 7
+      Text = '0.00'
+    end
+    object Label21: TLabel
+      Left = 13
+      Height = 15
+      Top = 88
+      Width = 56
+      Caption = 'Aliq FCP'
+      ParentColor = False
+      ParentFont = False
+    end
+    object Label22: TLabel
+      Left = 232
+      Height = 15
+      Top = 88
+      Width = 69
+      Caption = 'Valor FCP'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+    end
+    object Label13: TLabel
+      Left = 13
+      Height = 32
+      Top = 8
+      Width = 63
+      AutoSize = False
+      Caption = '&6 - Aliq. ST'
+      ParentColor = False
+      WordWrap = True
+    end
+    object edtAliqDest: TEdit
+      Left = 89
+      Height = 33
+      Top = 8
+      Width = 125
+      OnChange = edtQtdeChange
+      OnClick = edtQtdeClick
+      OnExit = edtAliqOrigemExit
+      OnKeyDown = edtQtdeKeyDown
+      OnKeyPress = edtQtdeKeyPress
+      TabOrder = 0
+      Text = '12.00'
+    end
+    object Label14: TLabel
+      Left = 232
+      Height = 32
+      Top = 9
+      Width = 70
+      AutoSize = False
+      Caption = 'Aliq. Red. ST'
+      ParentColor = False
+      WordWrap = True
+    end
+    object edtAliqDestRed: TEdit
+      Left = 308
+      Height = 33
+      Top = 8
+      Width = 125
+      OnChange = edtQtdeChange
+      OnClick = edtQtdeClick
+      OnExit = edtAliqOrigemExit
+      OnKeyDown = edtQtdeKeyDown
+      OnKeyPress = edtQtdeKeyPress
+      TabOrder = 1
+      Text = '12.00'
+    end
+    object edtRedST: TEdit
+      Left = 540
+      Height = 33
+      Top = 9
+      Width = 125
+      Font.Style = [fsBold]
+      OnChange = edtQtdeChange
+      OnClick = edtQtdeClick
+      OnKeyDown = edtQtdeKeyDown
+      OnKeyPress = edtQtdeKeyPress
+      ParentFont = False
+      ReadOnly = True
+      TabStop = False
+      TabOrder = 2
+      Text = '0.00'
+    end
+    object Label26: TLabel
+      Left = 464
+      Height = 32
+      Top = 9
+      Width = 70
+      AutoSize = False
+      Caption = 'Red %'
+      ParentColor = False
+      WordWrap = True
+    end
+  end
+  object btnCalc: TButton
+    Left = 417
+    Height = 33
+    Top = 515
+    Width = 70
+    Anchors = [akRight, akBottom]
+    AutoSize = True
+    Caption = '&Calcular'
+    OnClick = btnCalcClick
+    TabOrder = 4
+  end
+  object btnClear: TButton
+    Left = 489
+    Height = 33
+    Top = 515
+    Width = 64
+    Anchors = [akRight, akBottom]
+    AutoSize = True
+    Caption = '&Limpar'
+    OnClick = btnClearClick
+    TabOrder = 5
+  end
+  object btnExit: TButton
+    Left = 556
+    Height = 33
+    Top = 515
+    Width = 133
+    Action = actExit
+    Anchors = [akRight, akBottom]
+    AutoSize = True
+    TabOrder = 6
   end
   object actions: TActionList
     left = 624
-    top = 360
+    top = 408
     object actExit: TAction
       Caption = '&Sair do Programa'
       OnExecute = actExitExecute
@@ -749,7 +733,7 @@ object frmMain: TfrmMain
     object actFocusOnIPI: TAction
       Caption = 'actFocusOnIPI'
       OnExecute = actExitExecute
-      ShortCut = 32819
+      ShortCut = 32821
     end
     object actFocusOnAliq: TAction
       Caption = 'actFocusOnAliq'
@@ -759,10 +743,15 @@ object frmMain: TfrmMain
     object actFocusOnMVA: TAction
       Caption = 'actFocusOnMVA'
       OnExecute = actExitExecute
-      ShortCut = 32821
+      ShortCut = 32823
     end
     object actFocusOnCST: TAction
       Caption = 'actFocusOnCST'
+      OnExecute = actExitExecute
+      ShortCut = 32819
+    end
+    object actFocusOnAliqST: TAction
+      Caption = 'actFocusOnAliqST'
       OnExecute = actExitExecute
       ShortCut = 32822
     end
