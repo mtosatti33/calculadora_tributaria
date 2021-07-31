@@ -114,12 +114,15 @@ end;
 
 procedure TfrmMain.btnCalcClick(Sender: TObject);
 var
-  cst: byte;
+  vcst: byte;
   AliqOrigem, AliqOrigemRed, AliqDestRed, AliqDest, vlrSeguro, vlrFrete,
   vlrOutras, IPIVlr, mva, vlrLiq, ICMSRed, ICMSBase, STRed, ICMSVlr,
   STBase, IPIAliq, qtde, mult, vlrProduto, desc, STVlr, VlrUnit, FCPAliq, FCPVlr: single;
   somaValores: extended;
 begin
+  if cmbCST.Items.IndexOf(cmbCST.Text) <> -1 then
+     lblResultCST.Caption := CST[cmbCST.Items.IndexOf(cmbCST.Text)];
+
   //caso Negativo não calcula nada
   if not ValidaQuantidades then
   begin
@@ -128,7 +131,7 @@ begin
     Exit;
   end;
 
-  cst := cmbCST.items.IndexOf(cmbCST.Text);
+  vcst := cmbCST.items.IndexOf(cmbCST.Text);
 
   //--------------------------------------------------------------------------
   //Campos Informados pelo usuário/operador
@@ -175,15 +178,15 @@ begin
   somaValores := vlrLiq + vlrSeguro + vlrFrete + vlrOutras;
 
   //ICMS
-  ICMSBase := CalculaBaseICMS(cst, somaValores, ICMSRed);
-  ICMSVlr := CalculaValorICMS(cst, ICMSBase, AliqOrigem, AliqDest);
+  ICMSBase := CalculaBaseICMS(vcst, somaValores, ICMSRed);
+  ICMSVlr := CalculaValorICMS(vcst, ICMSBase, AliqOrigem, AliqDest);
 
   //Soma os valores pra compor a base da ST, com o valor do IPI Incluso
   somaValores := somaValores + IPIVlr;
 
   //ST
-  STBase := CalculaBaseST(cst, somaValores, STRed, mva);
-  STVlr := CalculaValorST(cst, STBase, AliqDest, ICMSVlr);
+  STBase := CalculaBaseST(vcst, somaValores, STRed, mva);
+  STVlr := CalculaValorST(vcst, STBase, AliqDest, ICMSVlr);
 
   //FCP
   FCPVlr:=CalculaValorFCP(STBase, FCPAliq);
@@ -204,7 +207,7 @@ begin
   edtFCPVlr.Text := FormatFloat(FORMAT, FCPVlr);
 
   //CST 30 é Simples Nacional, assim como CST 90
-  if cst = 3 then
+  if vcst = 3 then
   begin
     edtICMSBase.Text := FloatToStr(ZERO);
     edtICMSVlr.Text := FloatToStr(ZERO);
@@ -233,6 +236,7 @@ procedure TfrmMain.cmbCSTChange(Sender: TObject);
 begin
   if cmbCST.Items.IndexOf(cmbCST.Text) <> -1 then
      lblResultCST.Caption := CST[cmbCST.Items.IndexOf(cmbCST.Text)];
+
   case cmbCST.ItemIndex of
     0, 1:
     begin

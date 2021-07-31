@@ -2,10 +2,10 @@ object frmMain: TfrmMain
   Left = 420
   Height = 554
   Top = 111
-  Width = 699
+  Width = 670
   Caption = 'Calculadora de ICMS-ST'
   ClientHeight = 554
-  ClientWidth = 699
+  ClientWidth = 670
   OnCreate = FormCreate
   Position = poScreenCenter
   LCLVersion = '2.0.6.0'
@@ -13,10 +13,10 @@ object frmMain: TfrmMain
     Left = 8
     Height = 168
     Top = 0
-    Width = 680
+    Width = 650
     Caption = 'Produtos'
     ClientHeight = 150
-    ClientWidth = 678
+    ClientWidth = 648
     TabOrder = 0
     object Label1: TLabel
       Left = 15
@@ -30,7 +30,7 @@ object frmMain: TfrmMain
       WordWrap = True
     end
     object Label3: TLabel
-      Left = 232
+      Left = 224
       Height = 31
       Top = 8
       Width = 56
@@ -40,7 +40,7 @@ object frmMain: TfrmMain
       WordWrap = True
     end
     object Label4: TLabel
-      Left = 464
+      Left = 432
       Height = 32
       Top = 8
       Width = 67
@@ -75,7 +75,7 @@ object frmMain: TfrmMain
       Text = '1'
     end
     object edtVlrUnit: TEdit
-      Left = 308
+      Left = 296
       Height = 33
       Top = 8
       Width = 125
@@ -89,7 +89,7 @@ object frmMain: TfrmMain
       Text = '0.00'
     end
     object edtVlrProduto: TEdit
-      Left = 540
+      Left = 512
       Height = 33
       Top = 8
       Width = 125
@@ -124,7 +124,7 @@ object frmMain: TfrmMain
       Text = '0.00'
     end
     object Label6: TLabel
-      Left = 232
+      Left = 224
       Height = 15
       Top = 48
       Width = 35
@@ -132,7 +132,7 @@ object frmMain: TfrmMain
       ParentColor = False
     end
     object edtFrete: TEdit
-      Left = 308
+      Left = 296
       Height = 33
       Top = 48
       Width = 125
@@ -145,7 +145,7 @@ object frmMain: TfrmMain
       Text = '0.00'
     end
     object Label7: TLabel
-      Left = 464
+      Left = 432
       Height = 15
       Top = 48
       Width = 47
@@ -153,7 +153,7 @@ object frmMain: TfrmMain
       ParentColor = False
     end
     object edtSeguro: TEdit
-      Left = 540
+      Left = 512
       Height = 33
       Top = 48
       Width = 125
@@ -166,7 +166,7 @@ object frmMain: TfrmMain
       Text = '0.00'
     end
     object Label8: TLabel
-      Left = 13
+      Left = 15
       Height = 32
       Top = 88
       Width = 65
@@ -197,9 +197,9 @@ object frmMain: TfrmMain
       ParentColor = False
     end
     object Label23: TLabel
-      Left = 465
+      Left = 432
       Height = 30
-      Top = 88
+      Top = 87
       Width = 55
       AutoSize = False
       Caption = 'Valor Liquido'
@@ -209,7 +209,7 @@ object frmMain: TfrmMain
       WordWrap = True
     end
     object edtVlrLiq: TEdit
-      Left = 540
+      Left = 512
       Height = 33
       Top = 88
       Width = 125
@@ -225,9 +225,9 @@ object frmMain: TfrmMain
       Text = '0.00'
     end
     object cmbCST: TComboBox
-      Left = 308
+      Left = 296
       Height = 33
-      Top = 88
+      Top = 87
       Width = 125
       ItemHeight = 0
       ItemIndex = 0
@@ -249,7 +249,7 @@ object frmMain: TfrmMain
       Text = '00'
     end
     object Label11: TLabel
-      Left = 232
+      Left = 224
       Height = 15
       Top = 88
       Width = 43
@@ -258,7 +258,7 @@ object frmMain: TfrmMain
       ParentFont = False
     end
     object lblResultCST: TLabel
-      Left = 233
+      Left = 296
       Height = 13
       Top = 128
       Width = 251
@@ -273,13 +273,13 @@ object frmMain: TfrmMain
     Left = 8
     Height = 72
     Top = 280
-    Width = 680
+    Width = 650
     Caption = 'IPI'
     ClientHeight = 54
-    ClientWidth = 678
+    ClientWidth = 648
     TabOrder = 2
     object Label9: TLabel
-      Left = 13
+      Left = 15
       Height = 15
       Top = 8
       Width = 49
@@ -291,7 +291,7 @@ object frmMain: TfrmMain
       Left = 89
       Height = 33
       Top = 8
-      Width = 61
+      Width = 125
       OnChange = edtQtdeChange
       OnClick = edtQtdeClick
       OnExit = edtAliqOrigemExit
@@ -301,7 +301,7 @@ object frmMain: TfrmMain
       Text = '0.00'
     end
     object Label10: TLabel
-      Left = 233
+      Left = 432
       Height = 15
       Top = 8
       Width = 38
@@ -311,7 +311,7 @@ object frmMain: TfrmMain
       ParentFont = False
     end
     object edtIPIVlr: TEdit
-      Left = 308
+      Left = 512
       Height = 33
       Top = 8
       Width = 125
@@ -331,14 +331,14 @@ object frmMain: TfrmMain
     Left = 8
     Height = 112
     Top = 168
-    Width = 680
+    Width = 650
     Caption = 'ICMS'
     ClientHeight = 94
-    ClientWidth = 678
+    ClientWidth = 648
     TabOrder = 1
     OnKeyDown = edtQtdeKeyDown
     object Label12: TLabel
-      Left = 16
+      Left = 15
       Height = 32
       Top = 8
       Width = 52
@@ -362,7 +362,7 @@ object frmMain: TfrmMain
       Text = '12.00'
     end
     object edtRedICMS: TEdit
-      Left = 540
+      Left = 512
       Height = 33
       Top = 7
       Width = 125
@@ -378,7 +378,7 @@ object frmMain: TfrmMain
       Text = '0.00'
     end
     object Label16: TLabel
-      Left = 14
+      Left = 224
       Height = 32
       Top = 48
       Width = 52
@@ -390,7 +390,7 @@ object frmMain: TfrmMain
       WordWrap = True
     end
     object edtICMSBase: TEdit
-      Left = 89
+      Left = 296
       Height = 33
       Top = 48
       Width = 125
@@ -406,7 +406,7 @@ object frmMain: TfrmMain
       Text = '0.00'
     end
     object Label17: TLabel
-      Left = 232
+      Left = 432
       Height = 32
       Top = 47
       Width = 60
@@ -418,7 +418,7 @@ object frmMain: TfrmMain
       WordWrap = True
     end
     object edtICMSVlr: TEdit
-      Left = 308
+      Left = 512
       Height = 33
       Top = 47
       Width = 125
@@ -434,7 +434,7 @@ object frmMain: TfrmMain
       Text = '0.00'
     end
     object Label24: TLabel
-      Left = 232
+      Left = 224
       Height = 32
       Top = 8
       Width = 70
@@ -444,7 +444,7 @@ object frmMain: TfrmMain
       WordWrap = True
     end
     object edtAliqOrigemRed: TEdit
-      Left = 308
+      Left = 296
       Height = 33
       Top = 8
       Width = 125
@@ -457,7 +457,7 @@ object frmMain: TfrmMain
       Text = '12.00'
     end
     object Label25: TLabel
-      Left = 464
+      Left = 432
       Height = 32
       Top = 7
       Width = 70
@@ -471,13 +471,13 @@ object frmMain: TfrmMain
     Left = 8
     Height = 152
     Top = 352
-    Width = 680
+    Width = 650
     Caption = 'ST'
     ClientHeight = 134
-    ClientWidth = 678
+    ClientWidth = 648
     TabOrder = 3
     object Label18: TLabel
-      Left = 13
+      Left = 15
       Height = 15
       Top = 48
       Width = 66
@@ -499,7 +499,7 @@ object frmMain: TfrmMain
       Text = '0.00'
     end
     object Label19: TLabel
-      Left = 232
+      Left = 224
       Height = 15
       Top = 49
       Width = 55
@@ -509,7 +509,7 @@ object frmMain: TfrmMain
       ParentFont = False
     end
     object edtSTBase: TEdit
-      Left = 308
+      Left = 296
       Height = 33
       Top = 48
       Width = 125
@@ -525,7 +525,7 @@ object frmMain: TfrmMain
       Text = '0.00'
     end
     object Label20: TLabel
-      Left = 464
+      Left = 432
       Height = 15
       Top = 48
       Width = 59
@@ -535,7 +535,7 @@ object frmMain: TfrmMain
       ParentFont = False
     end
     object edtSTVlr: TEdit
-      Left = 540
+      Left = 512
       Height = 33
       Top = 47
       Width = 125
@@ -551,7 +551,7 @@ object frmMain: TfrmMain
       Text = '0.00'
     end
     object edtFCPAliq: TEdit
-      Left = 89
+      Left = 296
       Height = 33
       Top = 88
       Width = 125
@@ -564,7 +564,7 @@ object frmMain: TfrmMain
       Text = '0.00'
     end
     object edtFCPVlr: TEdit
-      Left = 308
+      Left = 512
       Height = 33
       Top = 88
       Width = 125
@@ -580,7 +580,7 @@ object frmMain: TfrmMain
       Text = '0.00'
     end
     object Label21: TLabel
-      Left = 13
+      Left = 224
       Height = 15
       Top = 88
       Width = 56
@@ -589,7 +589,7 @@ object frmMain: TfrmMain
       ParentFont = False
     end
     object Label22: TLabel
-      Left = 232
+      Left = 432
       Height = 15
       Top = 88
       Width = 69
@@ -599,7 +599,7 @@ object frmMain: TfrmMain
       ParentFont = False
     end
     object Label13: TLabel
-      Left = 13
+      Left = 15
       Height = 32
       Top = 8
       Width = 63
@@ -622,7 +622,7 @@ object frmMain: TfrmMain
       Text = '12.00'
     end
     object Label14: TLabel
-      Left = 232
+      Left = 224
       Height = 32
       Top = 9
       Width = 70
@@ -632,7 +632,7 @@ object frmMain: TfrmMain
       WordWrap = True
     end
     object edtAliqDestRed: TEdit
-      Left = 308
+      Left = 296
       Height = 33
       Top = 8
       Width = 125
@@ -645,7 +645,7 @@ object frmMain: TfrmMain
       Text = '12.00'
     end
     object edtRedST: TEdit
-      Left = 540
+      Left = 512
       Height = 33
       Top = 9
       Width = 125
@@ -661,7 +661,7 @@ object frmMain: TfrmMain
       Text = '0.00'
     end
     object Label26: TLabel
-      Left = 464
+      Left = 432
       Height = 32
       Top = 9
       Width = 70
@@ -672,7 +672,7 @@ object frmMain: TfrmMain
     end
   end
   object btnCalc: TButton
-    Left = 417
+    Left = 388
     Height = 33
     Top = 515
     Width = 70
@@ -683,7 +683,7 @@ object frmMain: TfrmMain
     TabOrder = 4
   end
   object btnClear: TButton
-    Left = 489
+    Left = 460
     Height = 33
     Top = 515
     Width = 64
@@ -694,7 +694,7 @@ object frmMain: TfrmMain
     TabOrder = 5
   end
   object btnExit: TButton
-    Left = 556
+    Left = 527
     Height = 33
     Top = 515
     Width = 133
