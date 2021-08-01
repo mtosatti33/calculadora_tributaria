@@ -25,7 +25,7 @@ const
   CFOP_03: array [0..1] of string = ('1403', '2403');
 
 
-  Messages: array[0..7] of string = (
+  Messages: array[0..8] of string = (
     'Valor não pode ser nulo',
     'Desconto não pode ser maior que o valor do produto',
     'Valor do Produto não pode ser zero',
@@ -33,7 +33,8 @@ const
     'Aliquota zero só se aplica aos CSTs 30, 40 e 60',
     'Informe um CST',
     'Redução só se aplica aos CSTs 20 e 70',
-    'Aliquota da redução não pode ser maior que o próprio');
+    'Aliquota da redução não pode ser maior que o próprio',
+    'A ser implementado');
 
   //Essas constantes tem relação com a constante acima
   MSGERROR_VLR_NULO = 0;
@@ -44,6 +45,7 @@ const
   MSGERROR_CST_INPUT = 5;
   MSGERROR_REDUCAO = 6;
   MSGERROR_RED_MAIOR_QUE_PROPRIO = 7;
+  MSG_SER_IMPLEMENTADO = 8;
 
   //Formatador de decimais
   FORMAT = '0.00';

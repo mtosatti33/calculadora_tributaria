@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ExtCtrls,
-  ActnList, LCLType, uconstantes, ufuncoes;
+  ActnList, LCLType, Menus, uconstantes, ufuncoes;
 
 type
   { TfrmMain }
@@ -22,10 +22,14 @@ type
     actFocusOnIPI: TAction;
     actFocusOnCST: TAction;
     actFocusOnAliqST: TAction;
+    actShowCSOSN: TAction;
+    actShowCFOP: TAction;
     actions: TActionList;
     btnCalc: TButton;
     btnClear: TButton;
     btnExit: TButton;
+    chkICMSArredOpcao: TCheckBox;
+    chkSTArredOpcao: TCheckBox;
     cmbCST: TComboBox;
     edtAliqDest: TEdit;
     edtAliqDestRed: TEdit;
@@ -81,7 +85,15 @@ type
     Label8: TLabel;
     Label9: TLabel;
     lblResultCST: TLabel;
+    MainMenu1: TMainMenu;
+    MenuItem1: TMenuItem;
+    MenuItem2: TMenuItem;
+    MenuItem3: TMenuItem;
+    MenuItem4: TMenuItem;
+    MenuItem5: TMenuItem;
     procedure actExitExecute(Sender: TObject);
+    procedure actShowCFOPExecute(Sender: TObject);
+    procedure actShowCSOSNExecute(Sender: TObject);
     procedure btnCalcClick(Sender: TObject);
     procedure btnClearClick(Sender: TObject);
     procedure cmbCSTChange(Sender: TObject);
@@ -112,6 +124,16 @@ begin
   ChamaAction(Sender as TAction);
 end;
 
+procedure TfrmMain.actShowCFOPExecute(Sender: TObject);
+begin
+  Mensagem(MSG_SER_IMPLEMENTADO);
+end;
+
+procedure TfrmMain.actShowCSOSNExecute(Sender: TObject);
+begin
+  Mensagem(MSG_SER_IMPLEMENTADO);
+end;
+
 procedure TfrmMain.btnCalcClick(Sender: TObject);
 var
   vcst: byte;
@@ -121,7 +143,7 @@ var
   somaValores: extended;
 begin
   if cmbCST.Items.IndexOf(cmbCST.Text) <> -1 then
-     lblResultCST.Caption := CST[cmbCST.Items.IndexOf(cmbCST.Text)];
+    lblResultCST.Caption := CST[cmbCST.Items.IndexOf(cmbCST.Text)];
 
   //caso Negativo não calcula nada
   if not ValidaQuantidades then
@@ -135,15 +157,17 @@ begin
 
   //--------------------------------------------------------------------------
   //Campos Informados pelo usuário/operador
+
   //Produto
   qtde := StrToFloat(edtQtde.Text);
   mult := StrToFloat(edtMult.Text);
   vlrProduto := StrToFloat(edtVlrProduto.Text);
   desc := StrToFloat(edtDesc.Text);
-
   vlrSeguro := StrToFloat(edtSeguro.Text);
   vlrFrete := StrToFloat(edtFrete.Text);
   vlrOutras := StrToFloat(edtOutras.Text);
+
+  //IPI
   IPIAliq := StrToFloat(edtIPIAliq.Text);
 
   //Aliq Origem
@@ -158,7 +182,7 @@ begin
   mva := StrToFloat(edtMVA.Text);
 
   //FCP
-  FCPAliq:=StrToFloat(edtFCPAliq.Text);
+  FCPAliq := StrToFloat(edtFCPAliq.Text);
   //--------------------------------------------------------------------------
 
   //--------------------------------------------------------------------------
@@ -189,7 +213,7 @@ begin
   STVlr := CalculaValorST(vcst, STBase, AliqDest, ICMSVlr);
 
   //FCP
-  FCPVlr:=CalculaValorFCP(STBase, FCPAliq);
+  FCPVlr := CalculaValorFCP(STBase, FCPAliq);
   //--------------------------------------------------------------------------
 
   //--------------------------------------------------------------------------
@@ -202,7 +226,7 @@ begin
   edtICMSBase.Text := FormatFloat(FORMAT, ICMSBase);
   edtICMSVlr.Text := FormatFloat(FORMAT, ICMSVlr);
   edtSTBase.Text := FormatFloat(FORMAT, STBase);
-  edtSTVlr.Text := FormatFloat(FORMAT, STVlr);    
+  edtSTVlr.Text := FormatFloat(FORMAT, STVlr);
   edtFCPAliq.Text := FormatFloat(FORMAT, FCPAliq);
   edtFCPVlr.Text := FormatFloat(FORMAT, FCPVlr);
 
@@ -235,7 +259,7 @@ end;
 procedure TfrmMain.cmbCSTChange(Sender: TObject);
 begin
   if cmbCST.Items.IndexOf(cmbCST.Text) <> -1 then
-     lblResultCST.Caption := CST[cmbCST.Items.IndexOf(cmbCST.Text)];
+    lblResultCST.Caption := CST[cmbCST.Items.IndexOf(cmbCST.Text)];
 
   case cmbCST.ItemIndex of
     0, 1:
@@ -247,7 +271,7 @@ begin
       edtAliqOrigemRed.SetFocus;
     5:
     begin
-      edtAliqOrigemRed.Text:=edtAliqOrigem.Text;
+      edtAliqOrigemRed.Text := edtAliqOrigem.Text;
       edtAliqDest.SetFocus;
     end;
   end;
@@ -286,13 +310,13 @@ begin
     end;
 
     if Sender = edtAliqOrigem then
-        edtAliqOrigemRed.Text := edtAliqOrigem.Text;
+      edtAliqOrigemRed.Text := edtAliqOrigem.Text;
 
     if Sender = edtAliqOrigemRed then
       edtRedICMS.Text := CalculaReducao(edtAliqOrigem.Text, edtAliqOrigemRed.Text);
 
     if Sender = edtAliqDest then
-        edtAliqDestRed.Text := edtAliqDest.Text;
+      edtAliqDestRed.Text := edtAliqDest.Text;
 
     if Sender = edtAliqDestRed then
       edtRedST.Text := CalculaReducao(edtAliqDest.Text, edtAliqDestRed.Text);
@@ -316,7 +340,7 @@ begin
   {$IfDef MSWINDOWS}
   for i := 0 to ComponentCount - 1 do
     if Components[i] is TEdit then
-        ConverterPontoPraVirgula(Components[i] as TEdit);
+      ConverterPontoPraVirgula(Components[i] as TEdit);
   {$EndIf}
 end;
 
@@ -331,9 +355,9 @@ end;
 procedure TfrmMain.ChamaAction(AAction: TAction);
 begin
   if AAction = actClear then
-     btnClearClick(nil);
+    btnClearClick(nil);
   if AAction = actCalc then
-     btnCalcClick(nil);
+    btnCalcClick(nil);
   if AAction = actFocusOnQtde then
     edtQtde.SetFocus;
   if AAction = actFocusOnVlr then
@@ -347,7 +371,7 @@ begin
   if AAction = actFocusOnCST then
     cmbCST.SetFocus;
   if AAction = actFocusOnAliqST then
-     edtAliqDest.SetFocus;
+    edtAliqDest.SetFocus;
   if AAction = actExit then
     Application.Terminate;
 end;
