@@ -28,20 +28,20 @@ type
     btnCalc: TButton;
     btnClear: TButton;
     btnExit: TButton;
-    chkICMSArredOpcao: TCheckBox;
-    chkSTArredOpcao: TCheckBox;
+    chkArredBaixoICMS: TCheckBox;
+    chkArredBaixoST: TCheckBox;
     cmbCST: TComboBox;
     edtAliqDest: TEdit;
     edtAliqDestRed: TEdit;
+    edtAliqOrigem: TEdit;
     edtAliqOrigemRed: TEdit;
     edtFCPAliq: TEdit;
     edtFCPVlr: TEdit;
+    edtRedICMS: TEdit;
     edtRedST: TEdit;
     edtVlrLiq: TEdit;
     edtQtde: TEdit;
     edtIPIVlr: TEdit;
-    edtAliqOrigem: TEdit;
-    edtRedICMS: TEdit;
     edtICMSBase: TEdit;
     edtICMSVlr: TEdit;
     edtMVA: TEdit;
@@ -59,12 +59,16 @@ type
     GroupBox2: TGroupBox;
     GroupBox3: TGroupBox;
     GroupBox4: TGroupBox;
+    GroupBox5: TGroupBox;
+    GroupBox6: TGroupBox;
+    GroupBox7: TGroupBox;
     Label1: TLabel;
     Label10: TLabel;
     Label11: TLabel;
     Label12: TLabel;
     Label13: TLabel;
     Label14: TLabel;
+    Label15: TLabel;
     Label16: TLabel;
     Label17: TLabel;
     Label18: TLabel;
@@ -74,7 +78,6 @@ type
     Label21: TLabel;
     Label22: TLabel;
     Label23: TLabel;
-    Label24: TLabel;
     Label25: TLabel;
     Label26: TLabel;
     Label3: TLabel;
@@ -142,8 +145,10 @@ var
   STBase, IPIAliq, qtde, mult, vlrProduto, desc, STVlr, VlrUnit, FCPAliq, FCPVlr: single;
   somaValores: extended;
 begin
-  if cmbCST.Items.IndexOf(cmbCST.Text) <> -1 then
-    lblResultCST.Caption := CST[cmbCST.Items.IndexOf(cmbCST.Text)];
+  vcst := cmbCST.items.IndexOf(cmbCST.Text);
+
+  if vcst <> -1 then
+    lblResultCST.Caption := CST[vcst];
 
   //caso Negativo não calcula nada
   if not ValidaQuantidades then
@@ -152,8 +157,6 @@ begin
     ProcuraEditVazia(GroupBox1);
     Exit;
   end;
-
-  vcst := cmbCST.items.IndexOf(cmbCST.Text);
 
   //--------------------------------------------------------------------------
   //Campos Informados pelo usuário/operador
@@ -244,7 +247,7 @@ var
 begin
   for i := 0 to self.ComponentCount - 1 do
   begin
-    if (Components[i] is TGroupBox) and (Components[i] <> GroupBox3) then
+    if (Components[i] is TGroupBox) and (Components[i] <> GroupBox5) and (Components[i] <> GroupBox6) then
     begin
       LimpaCampos((Components[i] as TGroupBox));
     end;
@@ -303,6 +306,7 @@ procedure TfrmMain.edtQtdeKeyDown(Sender: TObject; var Key: word; Shift: TShiftS
 begin
   if Key = 13 then
   begin
+    //ShowMessage((Sender as TEdit).Name);
     if not ValidaQuantidades then
     begin
       Mensagem(MSGERROR_QTDE);
