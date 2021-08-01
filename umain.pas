@@ -143,32 +143,25 @@ end;
 
 procedure TfrmMain.btnCalcClick(Sender: TObject);
 begin
-  with dados do
+  if dados.vcst <> -1 then
+    lblResultCST.Caption := CST[dados.vcst];
+
+  //caso Negativo não calcula nada
+  if not ValidaQuantidades then
   begin
-    dados.vcst := cmbCST.items.IndexOf(cmbCST.Text);
-
-    if dados.vcst <> -1 then
-    begin
-      lblResultCST.Caption := CST[dados.vcst];
-    end;
-
-    //caso Negativo não calcula nada
-    if not ValidaQuantidades then
-    begin
-      Mensagem(MSGERROR_VLR_NULO);
-      ProcuraEditVazia(GroupBox1);
-      Exit;
-    end;
-
-    //Campos Informados pelo usuário/operador
-    InformaCampos;
-
-    //Campos Calculados
-    CalculaCampos;
-
-    //Mostra os resultados
-    MostraResultados;
+    Mensagem(MSGERROR_VLR_NULO);
+    ProcuraEditVazia(GroupBox1);
+    Exit;
   end;
+
+  //Campos Informados pelo usuário/operador
+  InformaCampos;
+
+  //Campos Calculados
+  CalculaCampos;
+
+  //Mostra os resultados
+  MostraResultados;
 end;
 
 procedure TfrmMain.btnClearClick(Sender: TObject);
@@ -192,8 +185,10 @@ end;
 
 procedure TfrmMain.cmbCSTChange(Sender: TObject);
 begin
-  if cmbCST.Items.IndexOf(cmbCST.Text) <> -1 then
-    lblResultCST.Caption := CST[cmbCST.Items.IndexOf(cmbCST.Text)];
+  dados.vcst := cmbCST.items.IndexOf(cmbCST.Text);
+
+  if dados.vcst <> -1 then
+    lblResultCST.Caption := CST[dados.vcst];
 
   case cmbCST.ItemIndex of
     0, 1:
@@ -315,7 +310,6 @@ begin
 
     //FCP
     FCPAliq := StrToFloat(edtFCPAliq.Text);
-
   end;
 end;
 
@@ -372,8 +366,8 @@ begin
     //CST 30 é Simples Nacional, assim como CST 90
     if vcst = 3 then
     begin
-      edtICMSBase.Text := FloatToStr(ZERO);
-      edtICMSVlr.Text := FloatToStr(ZERO);
+      edtICMSBase.Text := FormatFloat(FORMAT, ZERO);
+      edtICMSVlr.Text := FormatFloat(FORMAT, ZERO);
     end;
   end;
 end;

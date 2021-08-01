@@ -9,9 +9,8 @@ uses
 
 type
   TDados = record
-
     //verificador de CST
-    vcst: byte;
+    vcst: SmallInt;
 
     //Produtos
     qtde: single;
