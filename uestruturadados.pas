@@ -16,12 +16,12 @@ type
     //Produtos
     qtde: single;
     mult: single;   
-    VlrUnit: single;
+    vlrUnit: single;
     vlrSeguro: single;
     vlrFrete: single;
     vlrOutras: single;
     vlrProduto: single;  
-    desc: single;
+    desconto: single;
     vlrLiq: single;
 
     //IPI
@@ -29,18 +29,18 @@ type
     IPIVlr: single;
 
     //ICMS
-    AliqOrigem: single;
-    AliqOrigemRed: single;
+    aliqOrigem: single;
+    aliqOrigemRed: single;
     ICMSRed: single;
     ICMSBase: single;
     ICMSVlr: single;
 
     //ST
     mva: single;      
-    AliqDestRed: single;
-    AliqDest: single;
-    STBase: single;  
+    aliqDestRed: single;
+    aliqDest: single;
     STRed: single;
+    STBase: single;
     STVlr: single;
 
     //FCP

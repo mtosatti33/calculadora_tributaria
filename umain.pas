@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ExtCtrls,
-  ActnList, LCLType, Menus, uconstantes, ufuncoes;
+  ActnList, LCLType, Menus, uconstantes, ufuncoes, uestruturadados;
 
 type
   { TfrmMain }
@@ -101,13 +101,16 @@ type
     procedure btnClearClick(Sender: TObject);
     procedure cmbCSTChange(Sender: TObject);
     procedure edtAliqOrigemExit(Sender: TObject);
-    procedure edtQtdeChange(Sender: TObject);
+    procedure Change(Sender: TObject);
     procedure edtQtdeClick(Sender: TObject);
     procedure edtQtdeKeyDown(Sender: TObject; var Key: word; Shift: TShiftState);
     procedure edtQtdeKeyPress(Sender: TObject; var Key: char);
     procedure FormCreate(Sender: TObject);
   private
     function ValidaQuantidades: boolean;
+    procedure InformaCampos;
+    procedure CalculaCampos;
+    procedure MostraResultados;
     procedure ChamaAction(AAction: TAction);
   public
 
@@ -115,6 +118,7 @@ type
 
 var
   frmMain: TfrmMain;
+  dados: TDados;
 
 implementation
 
@@ -138,106 +142,32 @@ begin
 end;
 
 procedure TfrmMain.btnCalcClick(Sender: TObject);
-var
-  vcst: byte;
-  AliqOrigem, AliqOrigemRed, AliqDestRed, AliqDest, vlrSeguro, vlrFrete,
-  vlrOutras, IPIVlr, mva, vlrLiq, ICMSRed, ICMSBase, STRed, ICMSVlr,
-  STBase, IPIAliq, qtde, mult, vlrProduto, desc, STVlr, VlrUnit, FCPAliq, FCPVlr: single;
-  somaValores: extended;
 begin
-  vcst := cmbCST.items.IndexOf(cmbCST.Text);
-
-  if vcst <> -1 then
-    lblResultCST.Caption := CST[vcst];
-
-  //caso Negativo não calcula nada
-  if not ValidaQuantidades then
+  with dados do
   begin
-    Mensagem(MSGERROR_VLR_NULO);
-    ProcuraEditVazia(GroupBox1);
-    Exit;
-  end;
+    dados.vcst := cmbCST.items.IndexOf(cmbCST.Text);
 
-  //--------------------------------------------------------------------------
-  //Campos Informados pelo usuário/operador
+    if dados.vcst <> -1 then
+    begin
+      lblResultCST.Caption := CST[dados.vcst];
+    end;
 
-  //Produto
-  qtde := StrToFloat(edtQtde.Text);
-  mult := StrToFloat(edtMult.Text);
-  vlrProduto := StrToFloat(edtVlrProduto.Text);
-  desc := StrToFloat(edtDesc.Text);
-  vlrSeguro := StrToFloat(edtSeguro.Text);
-  vlrFrete := StrToFloat(edtFrete.Text);
-  vlrOutras := StrToFloat(edtOutras.Text);
+    //caso Negativo não calcula nada
+    if not ValidaQuantidades then
+    begin
+      Mensagem(MSGERROR_VLR_NULO);
+      ProcuraEditVazia(GroupBox1);
+      Exit;
+    end;
 
-  //IPI
-  IPIAliq := StrToFloat(edtIPIAliq.Text);
+    //Campos Informados pelo usuário/operador
+    InformaCampos;
 
-  //Aliq Origem
-  AliqOrigem := StrToFloat(edtAliqOrigem.Text);
-  AliqOrigemRed := StrToFloat(edtAliqOrigemRed.Text);
+    //Campos Calculados
+    CalculaCampos;
 
-  //Aliq Destino
-  AliqDest := StrToFloat(edtAliqDest.Text);
-  AliqDestRed := StrToFloat(edtAliqDestRed.Text);
-
-  //ST
-  mva := StrToFloat(edtMVA.Text);
-
-  //FCP
-  FCPAliq := StrToFloat(edtFCPAliq.Text);
-  //--------------------------------------------------------------------------
-
-  //--------------------------------------------------------------------------
-  //Campos Calculados
-  //valores
-  VlrLiq := CalculaTotalLiq(vlrProduto, desc);
-  VlrUnit := CalculaValorUnitario(qtde, mult, vlrLiq);
-
-  //IPI
-  IPIVlr := CalculaIPI(vlrLiq, IPIAliq);
-
-  //Reduções
-  ICMSRed := CalculaReducao(AliqOrigem, AliqOrigemRed);
-  STRed := CalculaReducao(AliqDest, AliqDestRed);
-
-  //Soma os valores pra compor a base da ICMS
-  somaValores := vlrLiq + vlrSeguro + vlrFrete + vlrOutras;
-
-  //ICMS
-  ICMSBase := CalculaBaseICMS(vcst, somaValores, ICMSRed);
-  ICMSVlr := CalculaValorICMS(vcst, ICMSBase, AliqOrigem, AliqDest);
-
-  //Soma os valores pra compor a base da ST, com o valor do IPI Incluso
-  somaValores := somaValores + IPIVlr;
-
-  //ST
-  STBase := CalculaBaseST(vcst, somaValores, STRed, mva);
-  STVlr := CalculaValorST(vcst, STBase, AliqDest, ICMSVlr);
-
-  //FCP
-  FCPVlr := CalculaValorFCP(STBase, FCPAliq);
-  //--------------------------------------------------------------------------
-
-  //--------------------------------------------------------------------------
-  //Mostra os resultados
-  edtVlrUnit.Text := FormatFloat(FORMAT, VlrUnit);
-  edtVlrLiq.Text := FormatFloat(FORMAT, vlrLiq);
-  edtIPIVlr.Text := FormatFloat(FORMAT, IPIVlr);
-  edtRedICMS.Text := FormatFloat(FORMAT, ICMSRed);
-  edtRedST.Text := FormatFloat(FORMAT, STRed);
-  edtICMSBase.Text := FormatFloat(FORMAT, ICMSBase);
-  edtICMSVlr.Text := FormatFloat(FORMAT, ICMSVlr);
-  edtSTBase.Text := FormatFloat(FORMAT, STBase);
-  edtSTVlr.Text := FormatFloat(FORMAT, STVlr);
-  edtFCPAliq.Text := FormatFloat(FORMAT, FCPAliq);
-  edtFCPVlr.Text := FormatFloat(FORMAT, FCPVlr);
-
-  //CST 30 é Simples Nacional, assim como CST 90
-  if vcst = 3 then
-  begin
-    edtICMSBase.Text := FloatToStr(ZERO);
-    edtICMSVlr.Text := FloatToStr(ZERO);
+    //Mostra os resultados
+    MostraResultados;
   end;
 end;
 
@@ -247,7 +177,8 @@ var
 begin
   for i := 0 to self.ComponentCount - 1 do
   begin
-    if (Components[i] is TGroupBox) and (Components[i] <> GroupBox5) and (Components[i] <> GroupBox6) then
+    if (Components[i] is TGroupBox) and (Components[i] <> GroupBox5) and
+      (Components[i] <> GroupBox6) then
     begin
       LimpaCampos((Components[i] as TGroupBox));
     end;
@@ -285,7 +216,7 @@ begin
   FormataPontoFlutuante(Sender as TEdit);
 end;
 
-procedure TfrmMain.edtQtdeChange(Sender: TObject);
+procedure TfrmMain.Change(Sender: TObject);
 begin
   //Questão de Compatibilidade
   {$IfDef LINUX}
@@ -306,7 +237,6 @@ procedure TfrmMain.edtQtdeKeyDown(Sender: TObject; var Key: word; Shift: TShiftS
 begin
   if Key = 13 then
   begin
-    //ShowMessage((Sender as TEdit).Name);
     if not ValidaQuantidades then
     begin
       Mensagem(MSGERROR_QTDE);
@@ -354,6 +284,98 @@ begin
   if (edtQtde.Text = EmptyStr) or (edtMult.Text = EmptyStr) or
     (edtVlrProduto.Text = EmptyStr) or (edtDesc.Text = EmptyStr) then
     Result := False;
+end;
+
+procedure TfrmMain.InformaCampos;
+begin
+  with Dados do
+  begin
+    //Produto
+    qtde := StrToFloat(edtQtde.Text);
+    mult := StrToFloat(edtMult.Text);
+    vlrProduto := StrToFloat(edtVlrProduto.Text);
+    desconto := StrToFloat(edtDesc.Text);
+    vlrSeguro := StrToFloat(edtSeguro.Text);
+    vlrFrete := StrToFloat(edtFrete.Text);
+    vlrOutras := StrToFloat(edtOutras.Text);
+
+    //IPI
+    IPIAliq := StrToFloat(edtIPIAliq.Text);
+
+    //Aliq Origem
+    AliqOrigem := StrToFloat(edtAliqOrigem.Text);
+    AliqOrigemRed := StrToFloat(edtAliqOrigemRed.Text);
+
+    //Aliq Destino
+    AliqDest := StrToFloat(edtAliqDest.Text);
+    AliqDestRed := StrToFloat(edtAliqDestRed.Text);
+
+    //ST
+    mva := StrToFloat(edtMVA.Text);
+
+    //FCP
+    FCPAliq := StrToFloat(edtFCPAliq.Text);
+
+  end;
+end;
+
+procedure TfrmMain.CalculaCampos;
+begin
+  with Dados do
+  begin
+    //valores
+    VlrLiq := CalculaTotalLiq(vlrProduto, desconto);
+    VlrUnit := CalculaValorUnitario(qtde, mult, vlrLiq);
+
+    //IPI
+    IPIVlr := CalculaIPI(vlrLiq, IPIAliq);
+
+    //Reduções
+    ICMSRed := CalculaReducao(AliqOrigem, AliqOrigemRed);
+    STRed := CalculaReducao(AliqDest, AliqDestRed);
+
+    //Soma os valores pra compor a base da ICMS
+    somaValores := vlrLiq + vlrSeguro + vlrFrete + vlrOutras;
+
+    //ICMS
+    ICMSBase := CalculaBaseICMS(vcst, somaValores, ICMSRed);
+    ICMSVlr := CalculaValorICMS(vcst, ICMSBase, AliqOrigem, AliqDest);
+
+    //Soma os valores pra compor a base da ST, com o valor do IPI Incluso
+    somaValores := somaValores + IPIVlr;
+
+    //ST
+    STBase := CalculaBaseST(vcst, somaValores, STRed, mva);
+    STVlr := CalculaValorST(vcst, STBase, AliqDest, ICMSVlr);
+
+    //FCP
+    FCPVlr := CalculaValorFCP(STBase, FCPAliq);
+  end;
+end;
+
+procedure TfrmMain.MostraResultados;
+begin
+  with Dados do
+  begin
+    edtVlrUnit.Text := FormatFloat(FORMAT, VlrUnit);
+    edtVlrLiq.Text := FormatFloat(FORMAT, vlrLiq);
+    edtIPIVlr.Text := FormatFloat(FORMAT, IPIVlr);
+    edtRedICMS.Text := FormatFloat(FORMAT, ICMSRed);
+    edtRedST.Text := FormatFloat(FORMAT, STRed);
+    edtICMSBase.Text := FormatFloat(FORMAT, ICMSBase);
+    edtICMSVlr.Text := FormatFloat(FORMAT, ICMSVlr);
+    edtSTBase.Text := FormatFloat(FORMAT, STBase);
+    edtSTVlr.Text := FormatFloat(FORMAT, STVlr);
+    edtFCPAliq.Text := FormatFloat(FORMAT, FCPAliq);
+    edtFCPVlr.Text := FormatFloat(FORMAT, FCPVlr);
+
+    //CST 30 é Simples Nacional, assim como CST 90
+    if vcst = 3 then
+    begin
+      edtICMSBase.Text := FloatToStr(ZERO);
+      edtICMSVlr.Text := FloatToStr(ZERO);
+    end;
+  end;
 end;
 
 procedure TfrmMain.ChamaAction(AAction: TAction);
