@@ -36,17 +36,10 @@ type
     edtAliqOrigem: TEdit;
     edtAliqOrigemRed: TEdit;
     edtFCPAliq: TEdit;
-    edtFCPVlr: TEdit;
     edtRedICMS: TEdit;
     edtRedST: TEdit;
-    edtVlrLiq: TEdit;
     edtQtde: TEdit;
-    edtIPIVlr: TEdit;
-    edtICMSBase: TEdit;
-    edtICMSVlr: TEdit;
     edtMVA: TEdit;
-    edtSTBase: TEdit;
-    edtSTVlr: TEdit;
     edtMult: TEdit;
     edtVlrUnit: TEdit;
     edtVlrProduto: TEdit;
@@ -62,38 +55,40 @@ type
     GroupBox5: TGroupBox;
     GroupBox6: TGroupBox;
     GroupBox7: TGroupBox;
+    GroupBox8: TGroupBox;
     Label1: TLabel;
-    Label10: TLabel;
     Label11: TLabel;
     Label12: TLabel;
     Label13: TLabel;
     Label14: TLabel;
     Label15: TLabel;
-    Label16: TLabel;
-    Label17: TLabel;
     Label18: TLabel;
-    Label19: TLabel;
     Label2: TLabel;
-    Label20: TLabel;
     Label21: TLabel;
-    Label22: TLabel;
-    Label23: TLabel;
+    Label24: TLabel;
     Label25: TLabel;
     Label26: TLabel;
+    Label27: TLabel;
+    Label28: TLabel;
+    Label29: TLabel;
     Label3: TLabel;
+    Label30: TLabel;
+    Label31: TLabel;
+    Label32: TLabel;
     Label4: TLabel;
     Label5: TLabel;
     Label6: TLabel;
     Label7: TLabel;
     Label8: TLabel;
     Label9: TLabel;
+    lblICMSBase: TLabel;
+    lblICMSVlr: TLabel;
     lblResultCST: TLabel;
-    MainMenu1: TMainMenu;
-    MenuItem1: TMenuItem;
-    MenuItem2: TMenuItem;
-    MenuItem3: TMenuItem;
-    MenuItem4: TMenuItem;
-    MenuItem5: TMenuItem;
+    lblSTBase: TLabel;
+    lblSTValor: TLabel;
+    lblFCPValor: TLabel;
+    lblVlrLiq: TLabel;
+    lblIPIVlr: TLabel;
     procedure actExitExecute(Sender: TObject);
     procedure actShowCFOPExecute(Sender: TObject);
     procedure actShowCSOSNExecute(Sender: TObject);
@@ -106,12 +101,14 @@ type
     procedure edtQtdeKeyDown(Sender: TObject; var Key: word; Shift: TShiftState);
     procedure edtQtdeKeyPress(Sender: TObject; var Key: char);
     procedure FormCreate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     function ValidaQuantidades: boolean;
     procedure InformaCampos;
     procedure CalculaCampos;
     procedure MostraResultados;
     procedure ChamaAction(AAction: TAction);
+    procedure RotulosOcultados(ocultado: Boolean);
   public
 
   end;
@@ -133,12 +130,12 @@ end;
 
 procedure TfrmMain.actShowCFOPExecute(Sender: TObject);
 begin
-  Mensagem(MSG_SER_IMPLEMENTADO);
+  Mensagem(MSGERROR_SER_IMPLEMENTADO);
 end;
 
 procedure TfrmMain.actShowCSOSNExecute(Sender: TObject);
 begin
-  Mensagem(MSG_SER_IMPLEMENTADO);
+  Mensagem(MSGERROR_SER_IMPLEMENTADO);
 end;
 
 procedure TfrmMain.btnCalcClick(Sender: TObject);
@@ -162,6 +159,8 @@ begin
 
   //Mostra os resultados
   MostraResultados;
+
+  RotulosOcultados(false);
 end;
 
 procedure TfrmMain.btnClearClick(Sender: TObject);
@@ -181,6 +180,8 @@ begin
   edtQtde.SelectAll;
 
   edtMult.Text := '1';
+
+  RotulosOcultados(true);
 end;
 
 procedure TfrmMain.cmbCSTChange(Sender: TObject);
@@ -273,6 +274,11 @@ begin
   {$EndIf}
 end;
 
+procedure TfrmMain.FormShow(Sender: TObject);
+begin
+  RotulosOcultados(true);
+end;
+
 function TfrmMain.ValidaQuantidades: boolean;
 begin
   Result := True;
@@ -352,22 +358,23 @@ begin
   with Dados do
   begin
     edtVlrUnit.Text := FormatFloat(FORMAT, VlrUnit);
-    edtVlrLiq.Text := FormatFloat(FORMAT, vlrLiq);
-    edtIPIVlr.Text := FormatFloat(FORMAT, IPIVlr);
     edtRedICMS.Text := FormatFloat(FORMAT, ICMSRed);
     edtRedST.Text := FormatFloat(FORMAT, STRed);
-    edtICMSBase.Text := FormatFloat(FORMAT, ICMSBase);
-    edtICMSVlr.Text := FormatFloat(FORMAT, ICMSVlr);
-    edtSTBase.Text := FormatFloat(FORMAT, STBase);
-    edtSTVlr.Text := FormatFloat(FORMAT, STVlr);
-    edtFCPAliq.Text := FormatFloat(FORMAT, FCPAliq);
-    edtFCPVlr.Text := FormatFloat(FORMAT, FCPVlr);
+
+
+    lblVlrLiq.Caption := FormatFloat(FORMAT, vlrLiq);
+    lblIPIVlr.Caption := FormatFloat(FORMAT, IPIVlr);
+    lblICMSBase.Caption := FormatFloat(FORMAT, ICMSBase);
+    lblICMSVlr.Caption := FormatFloat(FORMAT, ICMSVlr);
+    lblSTBase.Caption := FormatFloat(FORMAT, STBase);
+    lblSTValor.Caption := FormatFloat(FORMAT, STVlr);
+    lblFCPValor.Caption := FormatFloat(FORMAT, FCPVlr);
 
     //CST 30 é Simples Nacional, assim como CST 90
     if vcst = 3 then
     begin
-      edtICMSBase.Text := FormatFloat(FORMAT, ZERO);
-      edtICMSVlr.Text := FormatFloat(FORMAT, ZERO);
+      lblICMSBase.Caption := FormatFloat(FORMAT, ZERO);
+      lblICMSVlr.Caption := FormatFloat(FORMAT, ZERO);
     end;
   end;
 end;
@@ -394,6 +401,24 @@ begin
     edtAliqDest.SetFocus;
   if AAction = actExit then
     Application.Terminate;
+end;
+
+procedure TfrmMain.RotulosOcultados(ocultado: Boolean);
+begin
+  Label24.Visible:=not ocultado;
+  Label27.Visible:=not ocultado;
+  Label28.Visible:=not ocultado;
+  Label29.Visible:=not ocultado;
+  Label30.Visible:=not ocultado;  
+  Label31.Visible:=not ocultado;
+  Label32.Visible:=not ocultado;
+  lblVlrLiq.Visible:=not ocultado;
+  lblICMSBase.Visible:=not ocultado;
+  lblICMSVlr.Visible:=not ocultado;
+  lblSTBase.Visible:=not ocultado;
+  lblSTValor.Visible:=not ocultado;
+  lblFCPValor.Visible:=not ocultado;
+  lblIPIVlr.Visible:=not ocultado;
 end;
 
 end.

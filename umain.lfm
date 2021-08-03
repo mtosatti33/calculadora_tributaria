@@ -1,23 +1,23 @@
 object frmMain: TfrmMain
-  Left = 223
-  Height = 573
-  Top = 83
-  Width = 903
+  Left = 394
+  Height = 572
+  Top = 105
+  Width = 674
   Caption = 'Calculadora de ICMS-ST'
-  ClientHeight = 548
-  ClientWidth = 903
-  Menu = MainMenu1
+  ClientHeight = 572
+  ClientWidth = 674
   OnCreate = FormCreate
+  OnShow = FormShow
   Position = poScreenCenter
   LCLVersion = '2.0.6.0'
   object GroupBox1: TGroupBox
     Left = 8
-    Height = 160
+    Height = 168
     Top = 0
-    Width = 712
+    Width = 480
     Caption = 'Produtos'
-    ClientHeight = 142
-    ClientWidth = 710
+    ClientHeight = 150
+    ClientWidth = 478
     TabOrder = 0
     object Label1: TLabel
       Left = 15
@@ -31,7 +31,7 @@ object frmMain: TfrmMain
       WordWrap = True
     end
     object Label3: TLabel
-      Left = 224
+      Left = 200
       Height = 31
       Top = 8
       Width = 56
@@ -41,9 +41,9 @@ object frmMain: TfrmMain
       WordWrap = True
     end
     object Label4: TLabel
-      Left = 488
+      Left = 15
       Height = 32
-      Top = 8
+      Top = 47
       Width = 67
       AutoSize = False
       Caption = '&2 - Vlr do Produto'
@@ -55,7 +55,7 @@ object frmMain: TfrmMain
       Left = 89
       Height = 33
       Top = 8
-      Width = 71
+      Width = 61
       OnChange = Change
       OnClick = edtQtdeClick
       OnKeyDown = edtQtdeKeyDown
@@ -64,7 +64,7 @@ object frmMain: TfrmMain
       Text = '1'
     end
     object edtMult: TEdit
-      Left = 184
+      Left = 165
       Height = 33
       Top = 8
       Width = 30
@@ -76,10 +76,10 @@ object frmMain: TfrmMain
       Text = '1'
     end
     object edtVlrUnit: TEdit
-      Left = 296
+      Left = 264
       Height = 33
       Top = 8
-      Width = 125
+      Width = 71
       OnClick = edtQtdeClick
       OnKeyDown = edtQtdeKeyDown
       OnKeyPress = edtQtdeKeyPress
@@ -89,10 +89,10 @@ object frmMain: TfrmMain
       Text = '0.00'
     end
     object edtVlrProduto: TEdit
-      Left = 568
+      Left = 89
       Height = 33
-      Top = 8
-      Width = 125
+      Top = 47
+      Width = 106
       OnChange = Change
       OnClick = edtQtdeClick
       OnExit = edtAliqOrigemExit
@@ -103,38 +103,38 @@ object frmMain: TfrmMain
       Text = '100.00'
     end
     object Label5: TLabel
-      Left = 488
+      Left = 15
       Height = 15
-      Top = 48
+      Top = 84
       Width = 64
       Caption = 'Desconto'
       ParentColor = False
     end
     object edtDesc: TEdit
-      Left = 568
+      Left = 89
       Height = 33
-      Top = 48
-      Width = 125
+      Top = 84
+      Width = 106
       OnChange = Change
       OnClick = edtQtdeClick
       OnExit = edtAliqOrigemExit
       OnKeyDown = edtQtdeKeyDown
       OnKeyPress = edtQtdeKeyPress
-      TabOrder = 7
+      TabOrder = 4
       Text = '0.00'
     end
     object Label6: TLabel
-      Left = 160
+      Left = 344
       Height = 15
-      Top = 48
+      Top = 8
       Width = 35
       Caption = 'Frete'
       ParentColor = False
     end
     object edtFrete: TEdit
-      Left = 232
+      Left = 408
       Height = 33
-      Top = 48
+      Top = 8
       Width = 61
       OnChange = Change
       OnClick = edtQtdeClick
@@ -145,30 +145,30 @@ object frmMain: TfrmMain
       Text = '0.00'
     end
     object Label7: TLabel
-      Left = 15
+      Left = 344
       Height = 15
-      Top = 48
+      Top = 88
       Width = 47
       Caption = 'Seguro'
       ParentColor = False
     end
     object edtSeguro: TEdit
-      Left = 89
+      Left = 408
       Height = 33
-      Top = 48
+      Top = 88
       Width = 61
       OnChange = Change
       OnClick = edtQtdeClick
       OnExit = edtAliqOrigemExit
       OnKeyDown = edtQtdeKeyDown
       OnKeyPress = edtQtdeKeyPress
-      TabOrder = 4
+      TabOrder = 7
       Text = '0.00'
     end
     object Label8: TLabel
-      Left = 304
+      Left = 344
       Height = 32
-      Top = 48
+      Top = 47
       Width = 52
       AutoSize = False
       Caption = 'Outras'
@@ -176,9 +176,9 @@ object frmMain: TfrmMain
       WordWrap = True
     end
     object edtOutras: TEdit
-      Left = 360
+      Left = 408
       Height = 33
-      Top = 48
+      Top = 47
       Width = 61
       OnChange = Change
       OnClick = edtQtdeClick
@@ -189,45 +189,18 @@ object frmMain: TfrmMain
       Text = '0.00'
     end
     object Label2: TLabel
-      Left = 168
+      Left = 152
       Height = 15
       Top = 16
       Width = 9
       Caption = 'X'
       ParentColor = False
     end
-    object Label23: TLabel
-      Left = 488
-      Height = 30
-      Top = 87
-      Width = 55
-      AutoSize = False
-      Caption = 'Valor Liquido'
-      Font.Style = [fsBold]
-      ParentColor = False
-      ParentFont = False
-      WordWrap = True
-    end
-    object edtVlrLiq: TEdit
-      Left = 568
-      Height = 33
-      Top = 88
-      Width = 125
-      Font.Style = [fsBold]
-      OnClick = edtQtdeClick
-      OnKeyDown = edtQtdeKeyDown
-      OnKeyPress = edtQtdeKeyPress
-      ParentFont = False
-      ReadOnly = True
-      TabStop = False
-      TabOrder = 9
-      Text = '0.00'
-    end
     object cmbCST: TComboBox
-      Left = 89
+      Left = 264
       Height = 33
       Top = 87
-      Width = 125
+      Width = 71
       ItemHeight = 0
       ItemIndex = 0
       Items.Strings = (
@@ -248,7 +221,7 @@ object frmMain: TfrmMain
       Text = '00'
     end
     object Label11: TLabel
-      Left = 15
+      Left = 200
       Height = 15
       Top = 88
       Width = 43
@@ -257,9 +230,9 @@ object frmMain: TfrmMain
       ParentFont = False
     end
     object lblResultCST: TLabel
-      Left = 89
+      Left = 200
       Height = 13
-      Top = 120
+      Top = 128
       Width = 251
       Caption = 'Seleciona na Opção Acima o CST Definido'
       Font.Height = -12
@@ -271,11 +244,11 @@ object frmMain: TfrmMain
   object GroupBox2: TGroupBox
     Left = 8
     Height = 72
-    Top = 272
-    Width = 712
+    Top = 280
+    Width = 480
     Caption = 'IPI'
     ClientHeight = 54
-    ClientWidth = 710
+    ClientWidth = 478
     TabOrder = 2
     object Label9: TLabel
       Left = 23
@@ -299,105 +272,26 @@ object frmMain: TfrmMain
       TabOrder = 0
       Text = '0.00'
     end
-    object Label10: TLabel
-      Left = 488
-      Height = 15
-      Top = 8
-      Width = 38
-      Caption = 'Valor'
-      Font.Style = [fsBold]
-      ParentColor = False
-      ParentFont = False
-    end
-    object edtIPIVlr: TEdit
-      Left = 568
-      Height = 33
-      Top = 8
-      Width = 125
-      Font.Style = [fsBold]
-      OnClick = edtQtdeClick
-      OnKeyDown = edtQtdeKeyDown
-      OnKeyPress = edtQtdeKeyPress
-      ParentFont = False
-      ReadOnly = True
-      TabStop = False
-      TabOrder = 1
-      Text = '0.00'
-    end
   end
   object GroupBox3: TGroupBox
     Left = 8
     Height = 112
-    Top = 160
-    Width = 712
+    Top = 168
+    Width = 480
     Caption = 'ICMS'
     ClientHeight = 94
-    ClientWidth = 710
+    ClientWidth = 478
     TabOrder = 1
     OnKeyDown = edtQtdeKeyDown
-    object Label16: TLabel
-      Left = 488
-      Height = 32
-      Top = 8
-      Width = 52
-      AutoSize = False
-      Caption = 'Base ICMS'
-      Font.Style = [fsBold]
-      ParentColor = False
-      ParentFont = False
-      WordWrap = True
-    end
-    object edtICMSBase: TEdit
-      Left = 568
-      Height = 33
-      Top = 8
-      Width = 125
-      Font.Style = [fsBold]
-      OnClick = edtQtdeClick
-      OnKeyDown = edtQtdeKeyDown
-      OnKeyPress = edtQtdeKeyPress
-      ParentFont = False
-      ReadOnly = True
-      TabStop = False
-      TabOrder = 0
-      Text = '0.00'
-    end
-    object Label17: TLabel
-      Left = 488
-      Height = 32
-      Top = 47
-      Width = 60
-      AutoSize = False
-      Caption = 'Valor ICMS'
-      Font.Style = [fsBold]
-      ParentColor = False
-      ParentFont = False
-      WordWrap = True
-    end
-    object edtICMSVlr: TEdit
-      Left = 568
-      Height = 33
-      Top = 47
-      Width = 125
-      Font.Style = [fsBold]
-      OnClick = edtQtdeClick
-      OnKeyDown = edtQtdeKeyDown
-      OnKeyPress = edtQtdeKeyPress
-      ParentFont = False
-      ReadOnly = True
-      TabStop = False
-      TabOrder = 1
-      Text = '0.00'
-    end
     object GroupBox6: TGroupBox
       Left = 8
       Height = 91
       Top = -2
-      Width = 463
+      Width = 461
       Caption = 'Alíquotas'
       ClientHeight = 73
-      ClientWidth = 461
-      TabOrder = 2
+      ClientWidth = 459
+      TabOrder = 0
       object Label12: TLabel
         Left = 15
         Height = 32
@@ -484,12 +378,12 @@ object frmMain: TfrmMain
   end
   object GroupBox4: TGroupBox
     Left = 8
-    Height = 200
-    Top = 344
-    Width = 712
+    Height = 209
+    Top = 352
+    Width = 480
     Caption = 'ST'
-    ClientHeight = 182
-    ClientWidth = 710
+    ClientHeight = 191
+    ClientWidth = 478
     TabOrder = 3
     object Label18: TLabel
       Left = 15
@@ -510,57 +404,7 @@ object frmMain: TfrmMain
       OnExit = edtAliqOrigemExit
       OnKeyDown = edtQtdeKeyDown
       OnKeyPress = edtQtdeKeyPress
-      TabOrder = 0
-      Text = '0.00'
-    end
-    object Label19: TLabel
-      Left = 488
-      Height = 15
-      Top = 10
-      Width = 55
-      Caption = 'Base ST'
-      Font.Style = [fsBold]
-      ParentColor = False
-      ParentFont = False
-    end
-    object edtSTBase: TEdit
-      Left = 568
-      Height = 33
-      Top = 9
-      Width = 125
-      Font.Style = [fsBold]
-      OnClick = edtQtdeClick
-      OnKeyDown = edtQtdeKeyDown
-      OnKeyPress = edtQtdeKeyPress
-      ParentFont = False
-      ReadOnly = True
-      TabStop = False
       TabOrder = 1
-      Text = '0.00'
-    end
-    object Label20: TLabel
-      Left = 488
-      Height = 15
-      Top = 49
-      Width = 59
-      Caption = 'Valor ST'
-      Font.Style = [fsBold]
-      ParentColor = False
-      ParentFont = False
-    end
-    object edtSTVlr: TEdit
-      Left = 568
-      Height = 33
-      Top = 48
-      Width = 125
-      Font.Style = [fsBold]
-      OnClick = edtQtdeClick
-      OnKeyDown = edtQtdeKeyDown
-      OnKeyPress = edtQtdeKeyPress
-      ParentFont = False
-      ReadOnly = True
-      TabStop = False
-      TabOrder = 2
       Text = '0.00'
     end
     object edtFCPAliq: TEdit
@@ -573,22 +417,7 @@ object frmMain: TfrmMain
       OnKeyDown = edtQtdeKeyDown
       OnKeyPress = edtQtdeKeyPress
       ParentFont = False
-      TabOrder = 3
-      Text = '0.00'
-    end
-    object edtFCPVlr: TEdit
-      Left = 568
-      Height = 33
-      Top = 144
-      Width = 125
-      Font.Style = [fsBold]
-      OnClick = edtQtdeClick
-      OnKeyDown = edtQtdeKeyDown
-      OnKeyPress = edtQtdeKeyPress
-      ParentFont = False
-      ReadOnly = True
-      TabStop = False
-      TabOrder = 4
+      TabOrder = 2
       Text = '0.00'
     end
     object Label21: TLabel
@@ -600,25 +429,15 @@ object frmMain: TfrmMain
       ParentColor = False
       ParentFont = False
     end
-    object Label22: TLabel
-      Left = 488
-      Height = 15
-      Top = 144
-      Width = 69
-      Caption = 'Valor FCP'
-      Font.Style = [fsBold]
-      ParentColor = False
-      ParentFont = False
-    end
     object GroupBox5: TGroupBox
       Left = 8
       Height = 91
       Top = 0
-      Width = 463
+      Width = 461
       Caption = 'Alíquotas'
       ClientHeight = 73
-      ClientWidth = 461
-      TabOrder = 5
+      ClientWidth = 459
+      TabOrder = 0
       object Label13: TLabel
         Left = 15
         Height = 32
@@ -703,12 +522,12 @@ object frmMain: TfrmMain
     end
   end
   object GroupBox7: TGroupBox
-    Left = 728
-    Height = 544
+    Left = 496
+    Height = 168
     Top = 0
     Width = 168
     Caption = 'Ações'
-    ClientHeight = 526
+    ClientHeight = 150
     ClientWidth = 166
     TabOrder = 4
     object btnCalc: TButton
@@ -736,6 +555,149 @@ object frmMain: TfrmMain
       Width = 150
       Action = actExit
       TabOrder = 2
+    end
+  end
+  object GroupBox8: TGroupBox
+    Left = 496
+    Height = 392
+    Top = 168
+    Width = 168
+    Caption = 'Resultados'
+    ClientHeight = 374
+    ClientWidth = 166
+    TabOrder = 5
+    object Label24: TLabel
+      Left = 8
+      Height = 24
+      Top = 32
+      Width = 90
+      AutoSize = False
+      Caption = 'Valor líquido:'
+      Font.Style = [fsUnderline]
+      ParentColor = False
+      ParentFont = False
+    end
+    object lblVlrLiq: TLabel
+      Left = 40
+      Height = 15
+      Top = 56
+      Width = 58
+      Caption = 'lblVlrLiq'
+      ParentColor = False
+    end
+    object Label27: TLabel
+      Left = 8
+      Height = 24
+      Top = 128
+      Width = 90
+      AutoSize = False
+      Caption = 'Base ICMS'
+      Font.Style = [fsUnderline]
+      ParentColor = False
+      ParentFont = False
+    end
+    object lblICMSBase: TLabel
+      Left = 40
+      Height = 15
+      Top = 152
+      Width = 83
+      Caption = 'lblICMSBase'
+      ParentColor = False
+    end
+    object Label28: TLabel
+      Left = 8
+      Height = 24
+      Top = 176
+      Width = 90
+      AutoSize = False
+      Caption = 'Valor ICMS'
+      Font.Style = [fsUnderline]
+      ParentColor = False
+      ParentFont = False
+    end
+    object lblICMSVlr: TLabel
+      Left = 40
+      Height = 15
+      Top = 200
+      Width = 71
+      Caption = 'lblICMSVlr'
+      ParentColor = False
+    end
+    object Label29: TLabel
+      Left = 8
+      Height = 24
+      Top = 224
+      Width = 90
+      AutoSize = False
+      Caption = 'Base ST:'
+      Font.Style = [fsUnderline]
+      ParentColor = False
+      ParentFont = False
+    end
+    object lblSTBase: TLabel
+      Left = 40
+      Height = 15
+      Top = 248
+      Width = 65
+      Caption = 'lblSTBase'
+      ParentColor = False
+    end
+    object Label30: TLabel
+      Left = 8
+      Height = 24
+      Top = 272
+      Width = 90
+      AutoSize = False
+      Caption = 'Valor ST:'
+      Font.Style = [fsUnderline]
+      ParentColor = False
+      ParentFont = False
+    end
+    object lblSTValor: TLabel
+      Left = 40
+      Height = 15
+      Top = 296
+      Width = 70
+      Caption = 'lblSTValor'
+      ParentColor = False
+    end
+    object Label31: TLabel
+      Left = 8
+      Height = 24
+      Top = 320
+      Width = 90
+      AutoSize = False
+      Caption = 'Valor FCP:'
+      Font.Style = [fsUnderline]
+      ParentColor = False
+      ParentFont = False
+    end
+    object lblFCPValor: TLabel
+      Left = 40
+      Height = 15
+      Top = 344
+      Width = 79
+      Caption = 'lblFCPValor'
+      ParentColor = False
+    end
+    object Label32: TLabel
+      Left = 8
+      Height = 24
+      Top = 80
+      Width = 90
+      AutoSize = False
+      Caption = 'Valor IPI:'
+      Font.Style = [fsUnderline]
+      ParentColor = False
+      ParentFont = False
+    end
+    object lblIPIVlr: TLabel
+      Left = 40
+      Height = 15
+      Top = 104
+      Width = 54
+      Caption = 'lblIPIVlr'
+      ParentColor = False
     end
   end
   object actions: TActionList
@@ -797,25 +759,6 @@ object frmMain: TfrmMain
     object actShowCSOSN: TAction
       Caption = 'CSOSN'
       OnExecute = actShowCSOSNExecute
-    end
-  end
-  object MainMenu1: TMainMenu
-    left = 172
-    top = 264
-    object MenuItem1: TMenuItem
-      Caption = 'Aplicativo'
-      object MenuItem3: TMenuItem
-        Action = actExit
-      end
-    end
-    object MenuItem2: TMenuItem
-      Caption = 'Informações'
-      object MenuItem4: TMenuItem
-        Action = actShowCFOP
-      end
-      object MenuItem5: TMenuItem
-        Action = actShowCSOSN
-      end
     end
   end
 end
