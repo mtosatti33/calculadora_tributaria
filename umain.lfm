@@ -408,9 +408,9 @@ object frmMain: TfrmMain
       Text = '0.00'
     end
     object edtFCPAliq: TEdit
-      Left = 89
+      Left = 314
       Height = 33
-      Top = 144
+      Top = 104
       Width = 125
       OnChange = Change
       OnClick = edtQtdeClick
@@ -421,9 +421,9 @@ object frmMain: TfrmMain
       Text = '0.00'
     end
     object Label21: TLabel
-      Left = 15
+      Left = 240
       Height = 15
-      Top = 144
+      Top = 104
       Width = 56
       Caption = 'Aliq FCP'
       ParentColor = False

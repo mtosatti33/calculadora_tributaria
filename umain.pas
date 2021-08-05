@@ -103,12 +103,13 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
   private
+    procedure InicializaWindows;
     function ValidaQuantidades: boolean;
     procedure InformaCampos;
     procedure CalculaCampos;
     procedure MostraResultados;
     procedure ChamaAction(AAction: TAction);
-    procedure RotulosOcultados(ocultado: Boolean);
+    procedure RotulosOcultados(ocultado: boolean);
   public
 
   end;
@@ -160,7 +161,7 @@ begin
   //Mostra os resultados
   MostraResultados;
 
-  RotulosOcultados(false);
+  RotulosOcultados(False);
 end;
 
 procedure TfrmMain.btnClearClick(Sender: TObject);
@@ -181,7 +182,7 @@ begin
 
   edtMult.Text := '1';
 
-  RotulosOcultados(true);
+  RotulosOcultados(True);
 end;
 
 procedure TfrmMain.cmbCSTChange(Sender: TObject);
@@ -261,22 +262,26 @@ begin
 end;
 
 procedure TfrmMain.FormCreate(Sender: TObject);
-{$ifdef MSWINDOWS}
-var
-  i: integer;
-{$EndIf}
+
 begin
   //Necessário por questão de compatibilidade
   {$IfDef MSWINDOWS}
-  for i := 0 to ComponentCount - 1 do
-    if Components[i] is TEdit then
-      ConverterPontoPraVirgula(Components[i] as TEdit);
+  InicializaWindows;
   {$EndIf}
 end;
 
 procedure TfrmMain.FormShow(Sender: TObject);
 begin
-  RotulosOcultados(true);
+  RotulosOcultados(True);
+end;
+
+procedure TfrmMain.InicializaWindows;
+var
+  i: integer;
+begin
+  for i := 0 to ComponentCount - 1 do
+    if Components[i] is TEdit then
+      ConverterPontoPraVirgula(Components[i] as TEdit);
 end;
 
 function TfrmMain.ValidaQuantidades: boolean;
@@ -403,22 +408,22 @@ begin
     Application.Terminate;
 end;
 
-procedure TfrmMain.RotulosOcultados(ocultado: Boolean);
+procedure TfrmMain.RotulosOcultados(ocultado: boolean);
 begin
-  Label24.Visible:=not ocultado;
-  Label27.Visible:=not ocultado;
-  Label28.Visible:=not ocultado;
-  Label29.Visible:=not ocultado;
-  Label30.Visible:=not ocultado;  
-  Label31.Visible:=not ocultado;
-  Label32.Visible:=not ocultado;
-  lblVlrLiq.Visible:=not ocultado;
-  lblICMSBase.Visible:=not ocultado;
-  lblICMSVlr.Visible:=not ocultado;
-  lblSTBase.Visible:=not ocultado;
-  lblSTValor.Visible:=not ocultado;
-  lblFCPValor.Visible:=not ocultado;
-  lblIPIVlr.Visible:=not ocultado;
+  Label24.Visible := not ocultado;
+  Label27.Visible := not ocultado;
+  Label28.Visible := not ocultado;
+  Label29.Visible := not ocultado;
+  Label30.Visible := not ocultado;
+  Label31.Visible := not ocultado;
+  Label32.Visible := not ocultado;
+  lblVlrLiq.Visible := not ocultado;
+  lblICMSBase.Visible := not ocultado;
+  lblICMSVlr.Visible := not ocultado;
+  lblSTBase.Visible := not ocultado;
+  lblSTValor.Visible := not ocultado;
+  lblFCPValor.Visible := not ocultado;
+  lblIPIVlr.Visible := not ocultado;
 end;
 
 end.
